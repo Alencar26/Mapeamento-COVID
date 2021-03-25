@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class CountryOperation {
 
-    private static Country GetCountry(Countries country){
+    public static Country GetCountry(Countries country){
         Country countryVar = new Country();
 
         Gson gson = new GsonBuilder().create();
