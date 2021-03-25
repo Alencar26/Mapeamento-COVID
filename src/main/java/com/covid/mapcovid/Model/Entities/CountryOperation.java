@@ -9,16 +9,21 @@ import java.io.IOException;
 
 public class CountryOperation {
 
-    public static long GetTotalCases(Countries country){
-        long cases = 0;
+    private static Country GetCountry(Countries country){
+        Country countryVar = new Country();
+
         Gson gson = new GsonBuilder().create();
         try {
-            Country countryVar = gson.fromJson(JsonCountry.GetCountry(country), Country.class);
-            cases = countryVar.getCases();
+            countryVar = gson.fromJson(JsonCountry.GetCountry(country), Country.class);
         }catch (IOException | InterruptedException e) {
             System.out.println(e.getMessage());
         }
-        return cases;
+        return countryVar;
+    }
+
+
+    public static long GetTotalCases(Countries country){
+        return GetCountry(country).getCases();
     }
 
 }
