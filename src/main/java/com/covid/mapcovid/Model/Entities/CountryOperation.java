@@ -21,7 +21,6 @@ public class CountryOperation {
         return countryVar;
     }
 
-
     public static long GetTotalCases(Countries country){
         return GetCountry(country).getCases();
     }

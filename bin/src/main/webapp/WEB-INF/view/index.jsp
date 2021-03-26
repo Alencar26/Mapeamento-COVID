@@ -15,7 +15,7 @@
 	<body class="bg-dark">
 		<nav class="navbar navbar-expand-lg navbar-light bg-dark">
 		  <div class="container-fluid">
-		    <a class="navbar-brand text-light fw-bold fs-3" href="#">Mapeamento COVID-19</a>
+		    <a class="navbar-brand text-light" href="#">Mapeamento COVID-19</a>
 		    <div class="collapse navbar-collapse" id="navbarNav">
 		      <ul class="navbar-nav">
 		        <li class="nav-item ms-5">
@@ -44,10 +44,13 @@
 		</nav>
 	    <div class="container-fluid p-3">
 	    	<div class="row p-2">
-	    		<div class="col-3">
-	    			<div class="row row-cols-1 g-1">
+	    		<div class="col-12">
+	    			<h1 class="text-light text-center">${nomePais}</h1>
+	    		</div>
+	    		<div class="col-3 mt-4">
+	    			<div class="row row-cols-1 row-cols-md-1 g-1">
 					  <div class="col">
-					    <div class="card bg-dark border-0">
+					    <div class="card bg-dark">
 					      <div class="row g-0">
 						    <div class="col-md-2">
 						      <img src="../img/virus.png" width="50px" class="m-3">
@@ -63,7 +66,7 @@
 					    </div>
 					  </div>
 					  <div class="col">
-					  	 <div class="card bg-dark border-0">
+					  	 <div class="card bg-dark">
 					      <div class="row g-0">
 						    <div class="col-md-2">
 						      <img src="../img/virus_ativo.png" width="50px" class="m-3">
@@ -78,7 +81,7 @@
 					    </div>
 					  </div>
 					  <div class="col">
-					  	<div class="card bg-dark border-0">
+					  	<div class="card bg-dark">
 					      <div class="row g-0">
 						    <div class="col-md-2">
 						      <img src="../img/mortos.png" width="50px" class="m-3">
@@ -93,7 +96,7 @@
 					    </div>
 					  </div>
 					  <div class="col">
-					  	<div class="card bg-dark border-0">
+					  	<div class="card bg-dark">
 					      <div class="row g-0">
 						    <div class="col-md-2">
 						      <img src="../img/recuperados.png" width="50px" class="m-3">
@@ -110,52 +113,8 @@
 					 
 					</div>
 	    		</div>
-	    		<div class="col-4">
+	    		<div class="col-3">
 	    			
-	    		</div>
-	    		<div class="col-5">
-	    			<div class="row">
-	    				<div class="col-12">
-	    					<p class="text-light fs-1 fw-bold"> ${nomePais} <img src="${bandeira}" width="60px" height="40px" class="rounded ms-3 mb-1"></p>
-	    				</div>
-	    				<div class="col-5">
-	    				  <div class="row row-cols-1 g-0">	    					
-							  <div class="col">
-							    <div class="card bg-dark border-0">
-							      <div class="card-body" style="padding:0.5em 0em">
-							        <h6 class="card-title text-light fs-5">População</h6>
-							        <h5 class="card-text text-light text-center">${populacao}</h5>
-							      </div>
-							  	</div>    
-							  </div>
-							  <div class="col">
-							    <div class="card bg-dark border-0">
-							      <div class="card-body" style="padding:0.5em 0em">
-							        <h6 class="card-title text-light fs-5">Ocup. Hospitalar</h6>
-							        <h5 class="card-text text-light text-center">${totalCasos}</h5>
-							      </div>
-							  	</div>    
-							  </div>
-							  <div class="col">
-							    <div class="card bg-dark border-0">
-							      <div class="card-body" style="padding:0.5em 0em">
-							        <h6 class="card-title text-light fs-5">Situação</h6>
-							        <h5 class="card-text text-danger fw-bold text-center fs-4">Alta</h5>
-							      </div>
-							  	</div>    
-							  </div>
-							</div>
-	    				</div>
-	    			</div>
-	    			<div class="row">
-	    				<div class="col-12 mt-2">
-	    					<div class="card bg-dark">
-						      <div class="card-body">
-						        <h6 class="card-title text-light fs-5">GRÁFICO</h6>
-						      </div>
-						  	</div>    
-	    				</div>
-	    			</div>
 	    		</div>
 	    	</div>
 	    </div>

@@ -68,4 +68,12 @@ public class CountryInfo {
     public void setFlag(String flag) {
         this.flag = flag;
     }
+
+	@Override
+	public String toString() {
+		return "CountryInfo [_id=" + _id + ", iso2=" + iso2 + ", iso3=" + iso3 + ", lat=" + lat + ", Long=" + Long
+				+ ", flag=" + flag + "]";
+	}
+    
+    
 }

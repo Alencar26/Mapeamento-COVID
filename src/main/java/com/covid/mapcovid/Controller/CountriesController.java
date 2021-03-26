@@ -1,6 +1,7 @@
 package com.covid.mapcovid.Controller;
 
 import com.covid.mapcovid.Model.Entities.Country;
+import com.covid.mapcovid.Model.Entities.CountryInfo;
 import com.covid.mapcovid.Model.Entities.CountryOperation;
 import com.covid.mapcovid.Model.Enums.Countries;
 
@@ -27,19 +28,26 @@ public class CountriesController {
         model.addAttribute("totalAtivos", NumberFormat.getIntegerInstance().format(countrySelect.getActive()));
         model.addAttribute("totalObitos", NumberFormat.getIntegerInstance().format(countrySelect.getDeaths()));
         model.addAttribute("totalRecuperados", NumberFormat.getIntegerInstance().format(countrySelect.getRecovered()));
+        model.addAttribute("bandeira", countrySelect.getCountryInfo().getFlag());
+        model.addAttribute("populacao",  NumberFormat.getIntegerInstance().format(countrySelect.getPopulation()));
         return "index";
     }
 	
 	@RequestMapping(value = "/country", method = RequestMethod.POST)
     public String countryChange(@RequestParam(defaultValue = "Brazil") Countries country, Model model) {
     	
-    	Country countrySelect = CountryOperation.GetCountry(country);
+    	 Country countrySelect = CountryOperation.GetCountry(country);
+
+    	 System.out.println(countrySelect.getCountryInfo());
     	
     	 model.addAttribute("nomePais", country.getCountries());
     	 model.addAttribute("totalCasos", NumberFormat.getIntegerInstance().format(countrySelect.getCases()));
          model.addAttribute("totalAtivos", NumberFormat.getIntegerInstance().format(countrySelect.getActive()));
          model.addAttribute("totalObitos", NumberFormat.getIntegerInstance().format(countrySelect.getDeaths()));
          model.addAttribute("totalRecuperados", NumberFormat.getIntegerInstance().format(countrySelect.getRecovered()));
+         model.addAttribute("bandeira", countrySelect.getCountryInfo().getFlag());
+         model.addAttribute("populacao",  NumberFormat.getIntegerInstance().format(countrySelect.getPopulation()));
+
         return "index";
     }
 
