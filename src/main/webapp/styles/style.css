@@ -1,0 +1,9 @@
+.mapdiv path {
+    fill: #191A1A;
+    stroke: #43454C;
+    transition: fill 0.3s;
+}
+
+.mapdiv :hover {
+    fill: rgb(156, 223, 79);
+}
