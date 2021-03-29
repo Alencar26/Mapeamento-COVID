@@ -14,7 +14,6 @@
 		<link rel="stylesheet" href="../../styles/style.css">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>>
 		<script src="../../js/script.js"></script>
-
 	</head>
 	<body class="bg-dark">
 		<nav class="navbar navbar-expand-lg navbar-light bg-dark">
