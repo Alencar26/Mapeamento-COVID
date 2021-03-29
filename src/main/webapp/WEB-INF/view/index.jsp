@@ -11,12 +11,9 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 		<link rel="icon" href="https://www.flaticon.com/svg/vstatic/svg/3209/3209992.svg?token=exp=1616641725~hmac=6b84deccdba98ecc7a095b842f29204a">
-<<<<<<< Updated upstream
-=======
 		<link rel="stylesheet" href="../../styles/style.css">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>>
 		<script src="../../js/script.js"></script>
->>>>>>> Stashed changes
 	</head>
 	<body class="bg-dark">
 		<nav class="navbar navbar-expand-lg navbar-light bg-dark">
@@ -93,7 +90,7 @@
 						    </div>
 						    <div class="col-10">
 						        <div class="card-body ms-4 ms-md-2">
-							        <h6 class="card-title text-light">Total de ”bitos</h6>
+							        <h6 class="card-title text-light">Total de √ìbitos</h6>
 							        <h5 class="card-text text-light" id="totalObitos">${totalObitos}</h5>
 						      	</div>
 						    </div>
@@ -118,10 +115,6 @@
 					 
 					</div>
 	    		</div>
-<<<<<<< Updated upstream
-	    		<div class="col-4">
-	    			
-=======
 	    		<div class="col-12 col-md-4 mt-4 mt-md-0">
 	    	
 	    			<div class="mapdiv">
@@ -156,8 +149,7 @@
 
         				</svg> 
     				</div>
->>>>>>> Stashed changes
-	    		</div>
+
 	    		<div class="col-md-5 col-12 mt-5 mt-md-0">
 	    			<div class="row">
 	    				<div class="col-12">
@@ -171,7 +163,7 @@
 							  <div class="col">
 							    <div class="card bg-dark border-0">
 							      <div class="card-body" style="padding:0.5em 0em">
-							        <h6 class="card-title text-light fs-5">PopulaÁ„o</h6>
+							        <h6 class="card-title text-light fs-5">Popula√ß√£o</h6>
 							        <h5 class="card-text text-light text-center" id="populacao">${populacao}</h5>
 							      </div>
 							  	</div>    
@@ -187,7 +179,7 @@
 							  <div class="col">
 							    <div class="card bg-dark border-0">
 							      <div class="card-body" style="padding:0.5em 0em">
-							        <h6 class="card-title text-light fs-5">SituaÁ„o</h6>
+							        <h6 class="card-title text-light fs-5">Situa√ß√£o</h6>
 							        <h5 class="card-text text-danger fw-bold text-center fs-4">Alta</h5>
 							      </div>
 							  	</div>    
@@ -199,7 +191,7 @@
 	    				<div class="col-12 mt-2">
 	    					<div class="card bg-dark">
 						      <div class="card-body">
-						        <h6 class="card-title text-light fs-5">GR¡FICO</h6>
+						        <h6 class="card-title text-light fs-5">GR√ÅFICO</h6>
 						      </div>
 						  	</div>    
 	    				</div>
