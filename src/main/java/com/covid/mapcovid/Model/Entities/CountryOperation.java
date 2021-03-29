@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class CountryOperation {
 
-    public static Country GetCountry(Countries country){
+    public static Country GetCountry(String country){
         Country countryVar = new Country();
 
         Gson gson = new GsonBuilder().create();
@@ -21,8 +21,8 @@ public class CountryOperation {
         return countryVar;
     }
 
-    public static long GetTotalCases(Countries country){
+    /*public static long GetTotalCases(Countries country){
         return GetCountry(country).getCases();
-    }
+    }*/
 
 }

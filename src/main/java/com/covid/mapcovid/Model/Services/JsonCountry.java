@@ -10,7 +10,7 @@ import java.net.http.HttpResponse;
 
 public class JsonCountry {
 
-    public static String GetCountry(Countries country) throws IOException, InterruptedException {
+    public static String GetCountry(String country) throws IOException, InterruptedException {
 
         final String URL_POST = "https://corona.lmao.ninja/v2/countries/" + country + "?yesterday&strict&query";
 
