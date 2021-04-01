@@ -4,6 +4,10 @@ $(document).ready(function(){
 	
 	var url = window.location;
 	
+	$("#bandeira").hide();
+	$("#bandeira-sm").hide();
+	$("#bandeira-md").hide();
+	
 	var objPais = [
 		{
 			id: "Argentina",
@@ -77,6 +81,9 @@ $(document).ready(function(){
 		
 		var nomeObj = objPais.find(element => element.id == event.target.id);
 		
+		$(".mapdiv path").css("fill", "#191A1A");
+		
+		
 		$.ajax({
 				type : "POST",
 				contentType : "application/json",
@@ -88,13 +95,35 @@ $(document).ready(function(){
 					$("#totalAtivos").html(result.active.toLocaleString());
 					$("#totalObitos").html(result.deaths.toLocaleString());
 					$("#totalRecuperados").html(result.recovered.toLocaleString());
-					$("#nomePais").html(nomeObj.name);
+					$("#nomePais, #nomePais-sm, #nomePais-md").html(nomeObj.name);
+					$("#bandeira, #bandeira-sm, #bandeira-md").show();
 					$("#bandeira").attr('src',result.countryInfo.flag);
+					$("#bandeira-sm").attr('src',result.countryInfo.flag);
+			        $("#bandeira-md").attr('src',result.countryInfo.flag);
 					$("#populacao").html(result.population.toLocaleString());
-					
-					
-					console.log(result.countryInfo.flag)
+					$("#totalTestes").html(result.tests.toLocaleString());
+					$("#totalCriticos").html(result.critical.toLocaleString());
 					console.log(result)
+
+					
+					$("#hojeCasos").html(result.todayCases.toLocaleString());
+					$("#hojeObitos").html(result.todayDeaths.toLocaleString());
+					$("#hojeRecuperados").html(result.todayRecovered.toLocaleString());
+					
+					if(result.casesPerOneMillion >= 50000){
+                        $("#situacao").html("Alta");
+                        $("#situacao").css("color", "red");
+                       	$("#"+event.target.id).css("fill", "#c62828");
+                    } else if(result.casesPerOneMillion >= 40000){
+                        $("#situacao").html("Constante");
+                        $("#situacao").css("color", "#F5CA7B");
+                        $("#"+event.target.id).css("fill", "#F5CA7B");
+                    } else {
+                        $("#situacao").html("Baixo");
+                        $("#situacao").css("color", "#5BC1AE");
+                         $("#"+event.target.id).css("fill", "#5BC1AE");
+                    }
+					
 				},
 				error : function(e) {
 					alert("Error!")

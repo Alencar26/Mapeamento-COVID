@@ -8,19 +8,22 @@
 		<title>Mapeamento COVID-19</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 		<link rel="icon" href="https://www.flaticon.com/svg/vstatic/svg/3209/3209992.svg?token=exp=1616641725~hmac=6b84deccdba98ecc7a095b842f29204a">
 		<link rel="stylesheet" href="../../styles/style.css">
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 		<script src="../../js/script.js"></script>
+		<link rel="stylesheet" href="../../styles/style.css">
 	</head>
-	<body class="bg-dark">
-		<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+	<body class="bg-cinza">
+		<nav class="navbar navbar-expand-lg navbar-light bg-cinza">
 		  <div class="container-fluid">
-		    <a class="navbar-brand text-light fw-bold fs-3" href="#">Mapeamento COVID-19</a>
-		    <div class="collapse navbar-collapse" id="navbarNav">
-		      <ul class="navbar-nav">
+		    <a class="navbar-brand text-light fw-bold fs-3" href="/">Mapeamento COVID-19</a>
+		      <div class="d-flex mt-2">
+		     
+				<img src="../../img/shield_baixo.png" class="me-2" width="50px">	
+				<img src="../../img/shield_constante.png" class="me-2" width="50px">		      	 
+				<img src="../../img/shield_alto.png" class="me-3" width="50px">		      	 
+					      	 
 		      <!-- 
 		        <li class="nav-item ms-5">
 		        	<form action="country" method="POST">
@@ -43,24 +46,29 @@
 	    			</form> 
 		        </li>
 		        -->
-		      </ul>
-		    </div>
+		      </div>
 		  </div>
 		</nav>
-	    <div class="container-fluid p-3">
-	    	<div class="row p-2">
-	    		<div class="col-md-3 col-12">
-	    			<div class="row row-cols-1 g-1">
+	    <div class="container-fluid ps-md-3 pt-4 pt-md-0">
+	    	<div class="row p-lg-2">
+	    		<div class="col-12 d-block d-md-none">
+    				  <div style='vertical-align:middle; display:inline;' class="text-light">
+						 <span class="text-light fs-1 fw-bold ms-3" id="nomePais-sm"> ${nomePais}</span>
+					  </div>
+					  <img style='vertical-align:middle;' src="${bandeira}" id="bandeira-sm" width="60px" height="40px" class="rounded ms-3 mb-1 mt-1">
+    			  </div>
+	    		<div class="col-12 col-sm-7 col-md-6 col-lg-4 col-xl-3 order-3 order-sm-2 order-md-1">
+	    			<div class="row row-cols-1 g-1 g-md-0">
 					  <div class="col">
-					    <div class="card bg-dark border-0">
+					    <div class="card bg-cinza border-0">
 					      <div class="row g-0">
 						    <div class="col-2">
-						      <img src="../img/virus.png" width="50px" class="m-3">
+						      <img src="../img/virus.png" width="47px" class="mx-3 my-3">
 						    </div>
 						    <div class="col-10">
-						      <div class="card-body ms-4 ms-md-2">
-						        <h6 class="card-title text-light">Total de Infectados</h6>
-						        <h5 class="card-text text-light" id="totalCasos">${totalCasos}</h5>
+						      <div class="card-body">
+						        <h6 class="card-title ms-2 ms-md-0">Total de Infectados</h6>
+						        <h5 class="card-text text-light ms-2 ms-md-0" id="totalCasos">${totalCasos}</h5>
 						      </div>
 						    </div>
 						  </div>
@@ -68,58 +76,95 @@
 					    </div>
 					  </div>
 					  <div class="col">
-					  	 <div class="card bg-dark border-0">
+					  	 <div class="card bg-cinza border-0">
 					      <div class="row g-0">
 						    <div class="col-2">
-						      <img src="../img/virus_ativo.png" width="50px" class="m-3">
+						      <img src="../img/virus_ativo.png" width="47px" class="mx-3 my-3">
 						    </div>
 						    <div class="col-10">
-						        <div class="card-body ms-4 ms-md-2">
-						        	<h6 class="card-title text-light">Total Casos Ativos</h6>
-						        	<h5 class="card-text text-light" id="totalAtivos">${totalAtivos}</h5>
+						        <div class="card-body">
+						        	<h6 class="card-title ms-2 ms-md-0">Total Casos Ativos</h6>
+						        	<h5 class="card-text text-light ms-2 ms-md-0" id="totalAtivos">${totalAtivos}</h5>
 						      	</div>
 						    </div>
 						  </div> 
 					    </div>
 					  </div>
 					  <div class="col">
-					  	<div class="card bg-dark border-0">
+					  	 <div class="card bg-cinza border-0">
 					      <div class="row g-0">
 						    <div class="col-2">
-						      <img src="../img/mortos.png" width="50px" class="m-3">
+						      <img src="../img/virus_critico.png" width="47px" class="mx-3 my-3">
 						    </div>
 						    <div class="col-10">
-						        <div class="card-body ms-4 ms-md-2">
-							        <h6 class="card-title text-light">Total de √ìbitos</h6>
-							        <h5 class="card-text text-light" id="totalObitos">${totalObitos}</h5>
+						        <div class="card-body">
+						        	<h6 class="card-title ms-2 ms-md-0">Total Casos CrÌticos</h6>
+						        	<h5 class="card-text text-light ms-2 ms-md-0" id="totalCriticos">${totalCriticos}</h5>
 						      	</div>
 						    </div>
 						  </div> 
 					    </div>
 					  </div>
 					  <div class="col">
-					  	<div class="card bg-dark border-0">
+					  	<div class="card bg-cinza border-0">
 					      <div class="row g-0">
 						    <div class="col-2">
-						      <img src="../img/recuperados.png" width="50px" class="m-3">
+						      <img src="../img/mortos.png" width="47px" class="mx-3 my-3">
 						    </div>
 						    <div class="col-10">
-						        <div class="card-body ms-4 ms-md-2">
-							        <h6 class="card-title text-light">Total de Recuperados</h6>
-							        <h5 class="card-text text-light" id="totalRecuperados">${totalRecuperados}</h5>
+						        <div class="card-body">
+							        <h6 class="card-title ms-2 ms-md-0">Total de ”bitos</h6>
+							        <h5 class="card-text text-light ms-2 ms-md-0" id="totalObitos">${totalObitos}</h5>
 						      	</div>
 						    </div>
 						  </div> 
 					    </div>
 					  </div>
-					 
+					  <div class="col">
+					  	<div class="card bg-cinza border-0">
+					      <div class="row g-0">
+						    <div class="col-2">
+						      <img src="../img/recuperados.png" width="47px" class="mx-3 my-3">
+						    </div>
+						    <div class="col-10">
+						        <div class="card-body">
+							        <h6 class="card-title ms-2 ms-md-0">Total de Recuperados</h6>
+							        <h5 class="card-text text-light ms-2 ms-md-0" id="totalRecuperados">${totalRecuperados}</h5>
+						      	</div>
+						    </div>
+						  </div> 
+					    </div>
+					  </div>
+					   <div class="col">
+					  	<div class="card bg-cinza border-0">
+					      <div class="row g-0">
+						    <div class="col-2">
+						      <img src="../img/testes.png" width="47px" class="mx-3 my-3">
+						    </div>
+						    <div class="col-10">
+						        <div class="card-body">
+							        <h6 class="card-title ms-2 ms-md-0">Total de Testes</h6>
+							        <h5 class="card-text text-light ms-2 ms-md-0" id="totalTestes">${totalTestes}</h5>
+						      	</div>
+						    </div>
+						  </div> 
+					    </div>
+					  </div>
 					</div>
 	    		</div>
-	    		<div class="col-12 col-md-4 mt-4 mt-md-0">
+
+	    		<div class="col-12 col-md-6 col-lg-4 order-1">
 	    	
 	    			<div class="mapdiv">
 	    			
-        				<svg width="430" height="557" viewBox="50 0 430 557" fill="none" xmlns="http://www.w3.org/2000/svg">
+	    				<div class="col-12 d-none d-md-block d-lg-none">
+		    				  <div style='vertical-align:middle; display:inline;' class="text-light">
+								 <span class="text-light fs-1 fw-bold ms-3" id="nomePais-md"> ${nomePais}</span>
+							  </div>
+							  <img style='vertical-align:middle;' src="${bandeira}" id="bandeira-md" width="60px" height="40px" class="rounded ms-3 mb-1 mt-1">
+		    			  </div>
+	    			
+        				<svg width="100%" height="540" viewBox="50 0 430 557" fill="none" id="svgMapa" xmlns="http://www.w3.org/2000/svg">
         					
             				<path title="Argentina" id="Argentina" name="country" value="Argentina" d="M219.328 245.234L219.519 245.44L219.516 245.656L220.152 246.098L221.425 246.77L222.617 248.067L223.728 249.994L224.773 251.423L225.747 252.346L226.644 253.001L227.463 253.383L227.9 253.693L227.957 253.931L228.722 254.425L230.196 255.176L231.128 255.928L231.519 256.677L232.975 257.453L235.496 258.252L237.329 258.634L238.473 258.599L240.113 259.237L242.25 260.551L243.555 261.464L244.025 261.973L245.424 262.799L248.914 264.508L250.452 264.937L251.183 265.329L251.615 265.825L252.042 265.979L252.463 265.785L253.339 265.964L254.67 266.514L255.712 267.182L257.052 268.653L257.478 269.24L257.658 269.766L257.594 270.23L257.186 270.726L256.434 271.252L256.211 271.483L256.195 271.703L256.004 272.147L255.382 273.095L255.223 273.537L255.188 273.864L254.794 274.221L253.744 274.881L253.526 275.201L253.473 275.546L253.341 275.752L253.199 275.838L252.998 276.183L252.834 276.756L252.818 277.49L252.946 278.388L252.92 278.679L252.689 278.832L252.557 279.041L252.512 279.46L252.313 279.767L251.967 279.963L251.838 280.187L251.929 280.442L251.674 280.693L251.073 280.941L250.705 281.303L250.568 281.777L250.232 282.201L249.698 282.575L249.523 283.074L249.803 283.997L253.094 283.677L255.776 284.014L258.95 284.902L261.055 285.212L262.093 284.944L262.864 284.981L263.366 285.326L264.04 285.396L264.886 285.192L265.586 285.348L266.139 285.864L266.641 285.735L267.093 284.966L267.611 284.403L268.196 284.051L268.924 283.944L269.796 284.086L270.491 284.369L271.012 284.793L271.579 284.78L272.194 284.331L272.489 283.793L272.462 283.166L272.706 282.717L273.219 282.446L273.565 282.082L273.745 281.62L274.355 281.34L275.394 281.238L275.939 281.013L275.987 280.663L276.293 280.34L276.86 280.045L277.249 279.678L277.458 279.239L277.799 278.961L278.277 278.85L278.809 277.924L279.391 276.193L279.738 273.856L279.859 270.55L280.446 270.553L280.72 270.798L281.155 270.925L281.612 270.647L282.001 270.518L282.616 270.508L282.949 270.195L283.338 270.146L283.604 270.314L283.862 270.52L284.409 270.567L284.844 271.103L285.322 271.267L285.526 271.882L285.835 273.502L286.409 274.459L286.979 275.551L287 276.037L286.68 276.528L286.627 277.235L286.428 278.964L286.361 279.601L286.56 280.035L286.632 280.643L286.323 281.385L285.722 282.496L285.139 282.796L284.989 282.808L284.2 283.451L283.644 283.692L283.322 283.53L282.954 283.808L282.541 284.53L282.036 284.852L281.123 285.031L280.849 285.115L280.318 285.09L279.861 285.269L279.48 285.654L279.075 285.797L278.642 285.701L278.25 285.842L277.899 286.222L277.695 286.633L277.638 287.077L277.295 287.38L276.661 287.541L276.441 287.764L276.481 288.074L276.196 288.315L275.125 288.568L274.349 289.015L273.872 289.657L273.367 290.061L272.572 290.309L271.493 290.964L271.337 291.368L271.748 291.741L271.896 292.073L271.78 292.363L271.445 292.403L270.886 292.192L270.489 292.147L270.252 292.271L270.14 292.505L270.153 292.847L269.954 293.08L269.541 293.204L269.281 293.487L269.17 293.931L268.652 294.491L267.729 295.166L267.001 296.076L266.467 297.222L265.844 297.976L265.13 298.339L264.639 298.854L264.37 299.524L263.608 300.561L262.357 301.97L261.221 302.937L260.201 303.463L259.629 304.059L259.503 304.721L258.842 305.477L257.648 306.326L257.309 306.708L257.03 307.02L256.99 307.566L256.525 308.283L255.631 309.173L255.32 309.945L255.725 310.919L255.784 312.103L255.607 312.576L255.215 312.738L255.127 313.043L255.339 313.494L255.349 314.087L255.161 314.824L254.748 315.667L254.106 316.617L253.951 317.252L254.284 317.572L254.447 317.912L254.442 318.274L254.305 318.797L254.039 319.485L253.637 319.995L253.097 320.328L252.933 320.75L253.151 321.258L253.18 321.789L253.024 322.342L253.116 322.88L253.454 323.404L253.43 324.001L252.842 325.229L252.7 325.988L253.067 329.245L252.844 329.702L252.471 330.227L252.028 330.267L251.524 330.175L251.158 330.503L250.93 331.949L250.235 335.084L250.358 335.831L250.917 337.044L251.121 337.818L251.277 338.4L251.4 339.507L251.075 340.005L250.775 340.092L250.396 340.372L250.844 341.724L251.201 342.347L252.222 343.627L256.139 345.408L257.763 346.459L259.602 347.896L260.606 349.374L260.695 350.594L259.226 352.422L259.062 353.96L259.363 355.044L259.895 356.051L261.318 357.361L262.365 357.842L263.779 357.79L264.021 358.157L264.166 358.48L264.389 361.146L264.362 362.151L263.946 363.074L261.229 367.325L258.909 369.935L258.069 371.381L257.771 372.931L257.027 373.67L253.006 376.022L246.766 378.127L241.724 379.224L240.578 379.593L232.473 380.801L230.905 380.97L228.864 380.863L227.208 381.025L225.361 380.695L223.712 380.315L222.789 379.373L221.693 379.256L221.395 379.727L221.93 380.93L221.669 382.381L221.994 383.21L222.641 383.376L223.264 383.805L223.814 384.381L222.867 384.44L223.234 384.899L223.64 385.167L223.594 386.127L223.226 388.444L222.303 388.94L222.056 389.074L221.777 389.575L221.189 391.802L221.001 393.251L221.253 394.186L222.362 396.155L221.943 397.438L221.242 398.135L218.206 399.571L216.992 400.146L215.081 400.541L212.001 400.608L210.863 400.519L208.224 399.209L206.264 398.425L204.471 397.802L202.725 397.43L202.975 397.242L203.091 396.905L202.599 396.716L202.242 396.674L201.093 397.351L200.61 398.043L200.47 398.651L200.446 400.109L200.65 401.337L201.477 404.371L201.563 406.025L201.171 408.119L201.719 409.354L202.385 409.912L203.88 410.465L204.46 410.842L205.099 410.783L205.295 410.929L205.201 411.199L204.825 411.733L204.849 412.296L205.982 412.462L207.158 412.348L208.39 412.097L208.68 411.706L208.688 410.887L207.244 410.743L207.426 410.438L208.522 410.106L209.956 409.562L210.688 409.461L211.188 409.825L211.523 410.16L211.937 411.041L212.195 412.204L212.205 413.606L212.034 414.928L211.829 415.396L211.467 415.959L208.89 416.679L208.167 416.49L207.496 415.491L207.284 414.456L206.71 413.759L205.477 413.206L204.25 413.375L203.034 414.335L201.84 414.645L201.415 415.52L204.411 416.939L205.826 417.336L206.288 417.321L206.747 417.507L206.32 418.036L205.893 418.363L203.762 419.087L202.822 419.593L201.724 420.59L200.186 422.771L199.713 423.247L199.477 423.803L199.319 425.313L199.818 427.831L199.292 428.888L199.617 430.063L199.434 430.85L198.897 431.983L196.739 433.777L196.355 435.091L197.104 435.868L197.053 436.547L196.803 437.165L195.906 437.157L192.647 436.743L191.46 437.418L190.36 438.244L190.059 438.638L189.669 438.886L187.428 439.328L186.985 439.621L184.601 442.783L183.581 444.753L182.348 446.692L182.026 447.516L181.956 448.659L182.128 449.691L182.3 450.453L182.729 451.433L183.631 452.551L188.225 457.133L189.178 457.534L194.091 458.028L195.181 458.67L195.818 459.692L196.051 460.595L195.769 462.887L195.477 463.607L194.934 464.261L193.772 465.105L192.381 465.554L192.778 465.874L193.342 465.827L194.572 465.554L195.103 465.827L195.506 466.737L194.736 467.104L194.502 467.548L193.946 468.22L191.111 470.909L189.584 471.715L188.179 472.799L186.295 473.898L185.556 474.531L184.558 475.86L183.03 477.311L181.382 480.439L181.317 481.047L181.556 481.453L180.641 486.987L180.321 487.642L179.658 488.342L177.913 489.498L177.073 489.641L175.961 488.972L175.336 488.272L174.721 487.077L173.98 485.846L173.942 486.285L174.2 487.034L174.025 487.818L172.13 488.176L171.628 488.543L173.338 488.379L174.503 488.617L174.997 488.902L175.44 489.5L175.832 490.219L175.505 490.619L174.57 490.949L173.362 491.556L171.934 492.655L171.142 493.93L170.801 494.848L170.414 496.703L170.312 497.934L169.708 498.881L168.777 499.737L168.83 499.933L169.461 499.494L169.966 499.355L170.401 500.496L170.986 502.785L171.257 504.378L171.214 504.849L171.04 505.499L169.837 505.655L168.763 505.635L167.974 505.913L168.398 506.201L169.123 506.099L170.124 506.784L171.236 506.491L171.743 506.95L172.109 507.369L173.811 510.728L175.298 512.814L176.05 514.054L175.677 514.62L175.542 513.868L174.573 513.672L173.628 513.471L172.052 512.933L169.928 512.119H167.802L166.113 511.432L164.248 510.673L160.309 510.606L156.84 510.559L153.286 510.512L151.012 510.48L149.49 510.46L149.095 510.175L149.229 509.232L148.665 508.538L147.846 507.699L146.85 507.109L146.356 506.318L145.803 505.43L146.115 504.643L146.593 502.736L146.601 501.897L146.168 501.312L146.037 500.481L146.168 500.092L146.558 499.796L146.791 498.44L146.609 497.113L146.311 495.929L145.916 495.409L145.409 495.16L145.033 495.113L144.201 495.555L142.821 495.443L142.351 495.612L141.677 496.086L140.721 496.785L140.189 496.542L140.026 495.793L139.671 495.146L139.446 494.575L139.277 493.635L138.995 492.432L138.431 491.011L137.566 489.865L137.518 488.835L137.357 487.545L137.797 486.293L137.54 485.256L137 484.023L137.166 482.748L137.698 482.044L137.864 481.151L140.324 481.01L140.222 479.811L140.63 478.844L141.089 477.968L141.481 477.571L142.356 477.224L143.387 476.721L143.97 476.145L144.249 475.629L144.418 474.965L144.464 474.258L144.294 472.757L144.488 472.296L145.127 471.688L146.206 471.15L146.67 469.723L146.405 468.486L145.806 467.506L145.044 467.064L144.976 466.06L145.32 465.107L145.768 464.088L146.303 462.919L146.27 462.103L146.746 461.627L148.099 460.566L148.563 459.529L149.038 459.248L149.594 459.124L149.626 458.539L149.221 457.959L149.157 457.232L149.205 456.428L149.328 455.354L149.959 454.952L150.894 454.084L151.143 453.533L151.176 452.797L150.904 451.279L150.673 450.192L150.555 449.793L150.131 449.059L149.817 448.595L150.319 448.014L151.259 447.407L151.656 446.526L151.291 445.78L150.759 445.385L150.593 444.244L150.792 442.798L151.189 442.362L152.585 442.143L152.717 441.402L153.78 440.355L153.748 439.355L153.071 438.742L152.408 437.755L151.919 436.885L150.292 436.408L148.563 436.15L148.33 435.329L148.397 434.856L149.2 435.047L150.512 434.88L151.5 434.843L152.188 434.759L152.98 434.64L153.71 434.985L154.44 434.769L154.738 433.476L155.203 432.789L155.27 432.144L154.805 431.631L153.954 431.472L150.23 431.065L150.118 430.552L150.15 429.691L150.289 428.813V428.382L150.628 428.002L151.014 427.208L151.286 426.68L151.014 425.995L150.421 424.986L150.853 424.519L150.888 423.964L150.754 423.421L150.137 422.818L149.592 421.987V421.104L150.23 420.868L150.655 420.598L150.754 420.052L150.52 419.38L149.637 419.174L148.461 418.762L148.101 418.418L147.769 417.698L148.016 415.682L147.892 414.469L147.787 413.799L148.075 413.283L148.467 412.819L148.281 411.74L147.932 411.175L148.056 410.741L148.386 410.304L148.673 409.766L148.92 409.639L149.291 409.947L149.916 409.766L150.671 409.332L150.751 408.821L150.601 408.091L150.04 406.261L149.535 405.132L149.64 404.725L149.838 404.299L149.68 402.751L149.731 401.818L149.769 399.077L149.825 398.145L149.31 397.192L149.379 396.302L149.742 395.652L150.083 394.774L150.338 393.997L150.606 393.648L151.06 393.474L151.165 393.05L150.958 392.728L150.373 392.224L150.239 391.609L150.362 391.138L150.649 390.865L151.095 390.867L151.431 390.195L151.527 389.366L151.597 388.982L151.339 388.498L151.154 387.36L150.98 386.715L151.186 386.444L151.473 386.345L151.981 386.499L152.338 386.42L152.4 386.075L152.44 385.705L152.577 385.455L152.896 384.621L153.237 383.589L153.318 382.863L153.197 380.896L153.377 380.444L153.742 380.032L154.25 379.645L154.918 379.326L155.748 378.864L156.768 378.695L157.181 378.184L157.469 377.505L157.549 376.947L157.157 376.56L156.642 376.098L156.397 374.94L156.266 373.871L156.191 372.527L155.678 371.373L155.141 370.078L154.996 368.927L155.176 368.3L155.388 367.303L155.162 366.849L154.894 366.038L155.173 365.403L155.511 364.418L155.471 363.919L155.203 362.731L154.956 362.067L155.203 361.357L155.595 360.695L155.903 360.34L155.852 359.77L155.987 359.301L156.572 358.988L157.12 358.408L157.511 358.338H157.984L158.293 358.175L158.416 357.728L158.5 357.235L159.254 356.622L159.697 356.059L160.5 355.942L160.892 355.332L160.9 354.551L160.808 353.762L161.077 352.852L160.779 351.462L160.808 350.728L160.5 350.123L160.561 349.471L160.395 349.054L159.928 348.898L159.756 348.379L159.982 348.124L160.422 347.928L160.975 347.531L161.388 345.626L161.584 345.06L161.775 344.383L161.751 344.031L162.017 343.523L162.349 342.751L162.873 342.007L163.171 341.496L163.461 340.809L163.544 340.395L163.915 340.189L164.342 340.137L164.844 340.008L165.05 339.755L165.013 339.388L164.981 338.577L164.83 337.289L164.733 335.635L164.822 334.548L165.152 333.459L165.461 332.869L165.378 332.415L165.295 331.917L164.717 331.644L164.17 331.879L163.786 331.815L163.295 331.237L163.149 330.624L163.233 329.788L163.617 329.267L163.767 328.613L163.541 328.409L163.058 327.975L162.602 326.482L162.658 325.212L162.204 324.874L161.992 323.885L161.525 323.53L161.34 322.791L161.195 322.029L161.257 321.695L161.745 321.6L162.022 321L161.815 320.665L161.445 320.375L160.972 320.397L160.548 320.055L159.982 318.624L159.533 317.835L159.675 316.687L159.764 315.791L159.957 315.025L160.027 314.422L160.376 314.134L160.706 314.266L161.015 314.199L161.3 313.71L161.611 313.402L161.592 313.159L161.407 312.896L161.318 312.433L161.536 311.879L161.912 310.617L162.481 309.228L162.725 308.709L162.664 308.27L162.787 308.072L163.174 308.293L164.272 308.05L164.642 307.434L164.787 306.886L165.117 306.579L164.972 306.142L164.519 306.011L164.245 305.805L164.355 305.309L164.516 304.17L164.489 303.334L164.076 301.551L163.743 299.79L163.976 299.202L164.696 298.398L165.241 298.036L165.34 297.577L165.88 295.508L165.942 294.38L166.296 293.757L166.53 292.586L167.507 291.579L167.794 290.912L168.186 290.848L168.393 290.632L168.911 289.89L169.585 289.129L170.165 288.744L170.31 288.144L170.586 287.325L171.161 285.968L171.483 285.023L171.915 284.684L172.42 283.448L172.637 282.724L173.215 282.426L173.666 282.342L174.098 282.682L174.552 282.618L174.965 282.193L175.958 281.903L176.407 281.747L176.614 281.323V280.579L176.2 280.028L175.36 278.974L174.635 277.795L174.557 277.426L174.552 277.021L174.675 276.511L175.021 275.933L175.891 274.98L175.797 274.3L175.164 271.803L174.93 271.116L174.49 269.843L174.552 269.34L174.938 267.936L175.274 267.37L175.768 267.266L176.036 267.077L176.12 266.827L175.789 266.514L175.644 266.117L175.499 265.552L175.043 265.353L174.78 264.885V264.198L175.191 263.302L175.644 263.052L175.83 262.655L176.316 262.293L176.759 262.012L177.129 261.494L178.657 260.859L179.87 260.365L182.238 259.423L183.862 258.775L184.018 258.329L184.142 258.024L184.893 255.749L185.868 252.815L186.477 250.979L185.076 249.63L185.323 249.27L186.126 248.347L186.292 247.608L186.612 247.291L188.051 246.539L188.298 246.041L188.424 245.487L188.716 245.091L189.264 245.009L190.26 244.657L191.329 244.322L191.651 243.868L191.954 243.079L192.215 242.206L192.421 242L192.765 242.022L193.337 242.241L193.638 242.57L195.133 243.617L195.804 244.215L196.443 244.294L197.705 244.178L197.96 244.205L201.179 244.24L201.67 244.292L202.795 244.547L203.432 244.753L203.875 244.86L204.586 245.182L205.204 246.251L205.55 247.102L205.791 247.851L206.331 249.168L206.699 249.67L206.83 249.426L207.145 247.985L207.577 247.147L208.159 246.207L209.333 244.014L209.743 243.687L210.2 243.528L210.519 243.515L210.844 243.679H211.287L211.601 243.506L214.678 243.478L217.87 243.454L217.937 243.466L218.082 243.843L218.614 244.666L219.21 245.103L219.328 245.234V245.234ZM225.17 382.55L225.245 383.116L224.853 383.049L223.922 382.508L223.608 382.002L223.535 381.789L224.485 382.019L224.934 382.23L225.17 382.55ZM174.103 543.844L174.146 541.126L174.205 537.494L174.216 534.277L174.227 531.162L174.238 527.957L174.248 524.775L174.262 521.394L174.275 517.983L174.718 518.467L176.469 520.823L176.925 521.791L177.212 522.922L176.511 522.202L175.773 522.614L175.408 523.289L175.097 524.023V524.542L175.338 524.995L176.058 525.39L177.806 525.524L177.934 525.673L178.955 528.528L179.467 529.168L180.063 529.676L181.443 531.144L182.767 532.732L184.338 534.243L186.029 535.406L187.57 536.289L189.039 537.373L190.606 538.891L192.311 539.997L194.142 540.779L195.992 541.433L198.841 541.178L199.724 541.247L200.274 541.729L199.721 543.061L199.015 544.135L198.073 544.579L197.077 544.742L196.177 544.72L195.281 544.522L194.438 544.633L193.632 545.087L192.792 545.313L191.927 545.343L191.084 545.725L190.239 546L189.361 545.772L187.079 544.7L185.597 544.445L180.576 544.02L178.965 543.775L177.36 543.405L176.52 543.388L175.319 543.629L174.358 543.599L174.103 543.844V543.844ZM205.026 542.19L205.859 542.468L207.502 542.257L208.369 542.254L208.75 542.354L208.919 542.502L210.052 542.269L210.554 542.297L210.425 542.813L209.381 543.326L208.951 543.108L206.731 543.155L205.749 543.686L205.33 543.681L204.361 544.437L203.652 543.959L203.456 543.52L203.969 542.894L204.452 542.882L204.782 542.629L205.026 542.19V542.19Z" fill="#191A1A" stroke="#43454C" stroke-width="1" mask="url(#path-1-inside-1)"/>
 							
@@ -150,54 +195,109 @@
         				</svg> 
     				</div>
 
-	    		<div class="col-md-5 col-12 mt-5 mt-md-0">
-	    			<div class="row">
-	    				<div class="col-12">
+	    		<div class="col-12 col-sm-5 col-md-12 col-lg-4 order-2">
+	    			<div class="row mb-4 mb-md-0">
+	    				<div class="col-12 d-none d-lg-block">
+
 							<div style='vertical-align:middle; display:inline;' class="text-light">
-								<span class="text-light fs-1 fw-bold" id="nomePais"> ${nomePais}</span>
+								<span class="text-light fs-1 fw-bold ms-3" id="nomePais"> ${nomePais}</span>
 							</div>
 							<img style='vertical-align:middle;' src="${bandeira}" id="bandeira" width="60px" height="40px" class="rounded ms-3 mb-1 mt-1">
 	    				</div>
-	    				<div class="col-md-5 col-12">
-	    				  <div class="row row-cols-1 g-0">	    					
+	    				<div class="col">
+	    				  <div class="row row-cols-1 row row-cols-md-3 row row-cols-lg-1 g-0 mt-3 mt-sm-0">	    					
 							  <div class="col">
-							    <div class="card bg-dark border-0">
-							      <div class="card-body" style="padding:0.5em 0em">
-							        <h6 class="card-title text-light fs-5">Popula√ß√£o</h6>
-							        <h5 class="card-text text-light text-center" id="populacao">${populacao}</h5>
+
+							    <div class="card bg-cinza border-0">
+							      <div class="card-body">
+							        <h6 class="card-title fs-5">PopulaÁ„o</h6>
+							        <h5 class="card-text text-light text-left mx-4" id="populacao">${populacao}</h5>
 							      </div>
 							  	</div>    
 							  </div>
 							  <div class="col">
-							    <div class="card bg-dark border-0">
-							      <div class="card-body" style="padding:0.5em 0em">
-							        <h6 class="card-title text-light fs-5">Ocup. Hospitalar</h6>
-							        <h5 class="card-text text-light text-center">${totalCasos}</h5>
+							    <div class="card bg-cinza border-0">
+							      <div class="card-body">
+							        <h6 class="card-title fs-5">Ocup. Hospitalar</h6>
+							        <h5 class="card-text text-light text-left mx-4">98%</h5>
 							      </div>
 							  	</div>    
 							  </div>
 							  <div class="col">
-							    <div class="card bg-dark border-0">
-							      <div class="card-body" style="padding:0.5em 0em">
-							        <h6 class="card-title text-light fs-5">Situa√ß√£o</h6>
-							        <h5 class="card-text text-danger fw-bold text-center fs-4">Alta</h5>
+
+							    <div class="card bg-cinza border-0">
+							      <div class="card-body">
+							        <h6 class="card-title fs-5">SituaÁ„o</h6>
+							        <h5 class="card-text fw-bold text-left mx-4 fs-4" id="situacao" style="color:${cor}; ">${situacao}</h5>
 							      </div>
 							  	</div>    
 							  </div>
 							</div>
 	    				</div>
 	    			</div>
-	    			<div class="row">
-	    				<div class="col-12 mt-2">
-	    					<div class="card bg-dark">
-						      <div class="card-body">
-						        <h6 class="card-title text-light fs-5">GR√ÅFICO</h6>
-						      </div>
-						  	</div>    
-	    				</div>
-	    			</div>
+
 	    		</div>
 	    	</div>
 	    </div>
+	    <footer class="footer fixed-bottom p-md-3 mt-4 mt-lg-0 bg-cinza">
+	    	<div class="container-fluid">
+	    		<div class="row">
+	    			<div class="col-12">
+	    				<span class="text-light fs-5 mx-3">01/04/2020</span>
+	    			</div>
+		    		<div class="col-12">
+		    			<div class="row row-cols-1 row-cols-sm-3  row-cols-xl-6 g-0">
+		    				
+						  <div class="col">
+						    <div class="card bg-cinza border-0">
+						      <div class="row g-0">
+							    <div class="col-2 col-sm-3">
+							      <img src="../img/virus.png" width="47px" class="mx-3 my-3">
+							    </div>
+							    <div class="col-10 col-sm-9">
+							      <div class="card-body">
+							        <h6 class="card-title ms-2 ms-md-0">Infectados</h6>
+							        <h5 class="card-text text-light ms-2 ms-md-0" id="hojeCasos">${hojeCasos}</h5>
+							      </div>
+							    </div>
+							  </div>
+						      
+						    </div>
+						  </div>
+						  <div class="col">
+						  	<div class="card bg-cinza border-0">
+						      <div class="row g-0">
+							    <div class="col-2 col-sm-3">
+							      <img src="../img/mortos.png" width="47px" class="mx-3 my-3">
+							    </div>
+							    <div class="col-10 col-sm-9">
+							        <div class="card-body">
+								        <h6 class="card-title ms-2 ms-md-0">”bitos</h6>
+								        <h5 class="card-text text-light ms-2 ms-md-0" id="hojeObitos">${hojeObitos}</h5>
+							      	</div>
+							    </div>
+							  </div> 
+						    </div>
+						  </div>
+						  <div class="col">
+						  	<div class="card bg-cinza border-0">
+						      <div class="row g-0">
+							    <div class="col-2 col-sm-3">
+							      <img src="../img/recuperados.png" width="47px" class="mx-3 my-3">
+							    </div>
+							    <div class="col-10 col-sm-9">
+							        <div class="card-body">
+								        <h6 class="card-title ms-2 ms-md-0">Recuperados</h6>
+								        <h5 class="card-text text-light ms-2 ms-md-0" id="hojeRecuperados">${hojeRecuperados}</h5>
+							      	</div>
+							    </div>
+							  </div> 
+						    </div>
+						  </div>
+						</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	    </footer>
 	</body>
 </html>
