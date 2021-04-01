@@ -95,6 +95,16 @@ $(document).ready(function(){
 					
 					console.log(result.countryInfo.flag)
 					console.log(result)
+					
+					
+							if(result.casesPerOneMillion >= 50000){
+                        $("#situacao").html("Alta");
+                    } else if(result.casesPerOneMillion >= 40000){
+                        $("#situacao").html("Constante");
+                    } else {
+                        $("#situacao").html("Baixo");
+                    }
+					
 				},
 				error : function(e) {
 					alert("Error!")
