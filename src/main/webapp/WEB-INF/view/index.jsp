@@ -153,7 +153,7 @@
 					</div>
 	    		</div>
 
-	    		<div class="col-12 col-md-6 col-lg-4 order-1">
+	    		<div class="col-12 col-md-6 col-lg-4 order-1 order-md-2">
 	    	
 	    			<div class="mapdiv">
 	    			
@@ -194,8 +194,8 @@
 
         				</svg> 
     				</div>
-
-	    		<div class="col-12 col-sm-5 col-md-12 col-lg-4 order-2">
+				</div>
+	    		<div class="col-12 col-sm-5 col-md-12 col-lg-4 order-2 order-md-3">
 	    			<div class="row mb-4 mb-md-0">
 	    				<div class="col-12 d-none d-lg-block">
 
