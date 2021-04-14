@@ -12,6 +12,11 @@
 		<link rel="stylesheet" href="../../styles/style.css">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 		<script src="../../js/script.js"></script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/series-label.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script src="https://code.highcharts.com/modules/export-data.js"></script>
+		<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 		<link rel="stylesheet" href="../../styles/style.css">
 	</head>
 	<body class="bg-cinza">
@@ -98,7 +103,7 @@
 						    </div>
 						    <div class="col-10">
 						        <div class="card-body">
-						        	<h6 class="card-title ms-2 ms-md-0">Total Casos Críticos</h6>
+						        	<h6 class="card-title ms-2 ms-md-0">Total Casos Crï¿½ticos</h6>
 						        	<h5 class="card-text text-light ms-2 ms-md-0" id="totalCriticos">${totalCriticos}</h5>
 						      	</div>
 						    </div>
@@ -113,7 +118,7 @@
 						    </div>
 						    <div class="col-10">
 						        <div class="card-body">
-							        <h6 class="card-title ms-2 ms-md-0">Total de Óbitos</h6>
+							        <h6 class="card-title ms-2 ms-md-0">Total de ï¿½bitos</h6>
 							        <h5 class="card-text text-light ms-2 ms-md-0" id="totalObitos">${totalObitos}</h5>
 						      	</div>
 						    </div>
@@ -210,7 +215,7 @@
 
 							    <div class="card bg-cinza border-0">
 							      <div class="card-body">
-							        <h6 class="card-title fs-5">População</h6>
+							        <h6 class="card-title fs-5">Populaï¿½ï¿½o</h6>
 							        <h5 class="card-text text-light text-left mx-4" id="populacao">${populacao}</h5>
 							      </div>
 							  	</div>    
@@ -227,7 +232,7 @@
 
 							    <div class="card bg-cinza border-0">
 							      <div class="card-body">
-							        <h6 class="card-title fs-5">Situação</h6>
+							        <h6 class="card-title fs-5">Situaï¿½ï¿½o</h6>
 							        <h5 class="card-text fw-bold text-left mx-4 fs-4" id="situacao" style="color:${cor}; ">${situacao}</h5>
 							      </div>
 							  	</div>    
@@ -272,7 +277,7 @@
 							    </div>
 							    <div class="col-10 col-sm-9">
 							        <div class="card-body">
-								        <h6 class="card-title ms-2 ms-md-0">Óbitos</h6>
+								        <h6 class="card-title ms-2 ms-md-0">ï¿½bitos</h6>
 								        <h5 class="card-text text-light ms-2 ms-md-0" id="hojeObitos">${hojeObitos}</h5>
 							      	</div>
 							    </div>
@@ -298,6 +303,12 @@
 	    			</div>
 	    		</div>
 	    	</div>
+	    			<figure class="highcharts-figure">
+  <div id="container"></div>
+  <p class="highcharts-description">
+    esse eh o grafico
+  </p>
+</figure>
 	    </footer>
 	</body>
 </html>
