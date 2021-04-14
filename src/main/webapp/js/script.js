@@ -69,6 +69,8 @@ $(document).ready(function(){
 	});
 	
 	
+	
+	
 	function ajaxPost(event){
 	
 		var formData = {}
@@ -114,6 +116,7 @@ $(document).ready(function(){
                         $("#situacao").html("Alta");
                         $("#situacao").css("color", "red");
                        	$("#"+event.target.id).css("fill", "#c62828");
+                       	
                     } else if(result.casesPerOneMillion >= 40000){
                         $("#situacao").html("Constante");
                         $("#situacao").css("color", "#F5CA7B");
@@ -131,5 +134,135 @@ $(document).ready(function(){
 				}
 			});
 	}
+	
+	
+	
+	var options = {
+	  chart: {
+	    type: 'spline',
+	    events: {
+	    	load: getData
+	    }
+	  },
+	  title: {
+	    text: 'COVID-19'
+	  },
+	  subtitle: {
+	    text: 'Total de Infectados, Óbitos e Recuperados'
+	  },
+	  xAxis: {
+		  type: 'datetime',
+		  labels: {
+		    format: '{value:%d-%m-%Y}',
+		}
+	},
+	yAxis: {
+	    title: {
+	      text: 'Total'
+	    },
+	    min: 0
+	  },
+	 tooltip: {
+        shared: true,
+        crosshairs: true
+    },
+	
+	  plotOptions: {
+	    series: {
+	      marker: {
+	        enabled: true
+	      }
+	    }
+	  },
+	
+	  colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+	  series: [
+	  	{
+		    name: "Total de Casos",
+		    data: [],
+	    },
+	    {
+		    name: "Total de Óbitos",
+		    data: [] 
+		},
+		{
+		    name: "Total de Recuperados",
+		    data: [] 
+		}
+	  ],
+	  responsive: {
+		    rules: [{
+		      condition: {
+		        maxWidth: 700
+		      },
+		      chartOptions: {
+		        plotOptions: {
+		          series: {
+		            marker: {
+		              radius: 2.5
+		            }
+		          }
+		        }
+		      }
+		    }]
+		}
+	};
+	var chart = Highcharts.chart('container', options)
+	
+	// Data
+	function getData() {
+	    fetch('https://disease.sh/v3/covid-19/historical/brazil?lastdays=30').then(function(response) {
+	      return response.json()
+	    }).then(function(data) {
+	    
+	      var arrayTotalCasos = []	
+	      var arrayTotalObitos = []	
+	      var arrayTotalRecuperados = []	
+	          
+	   	  var totalCasos = data.timeline.cases
+	   	  
+	   	  for (var prop in totalCasos){
+	   	  	var dateFinal = parseDate(prop)
+	   	  	arrayTotalCasos.push({x: new Date(prop).getTime(),y: totalCasos[prop]}) 
+	   	  }
+	   	  
+	   	  var totalObitos = data.timeline.deaths
+	   	  
+	   	  for (var prop in totalObitos){
+	   	  	var dateFinal = parseDate(prop)
+	   	  	arrayTotalObitos.push({x: new Date(prop).getTime(),y: totalObitos[prop]}) 
+	   	  }
+	   	  
+	   	  var totalRecuperados = data.timeline.recovered
+	   	  
+	   	  for (var prop in totalRecuperados){
+	   	  	var dateFinal = parseDate(prop)
+	   	  	arrayTotalRecuperados.push({x: new Date(prop).getTime(),y: totalRecuperados[prop]}) 
+	   	  }
+	   	  	   	  
+	   	  arrayTotalCasos = arrayTotalCasos.sort(sortfunction)
+	   	  arrayTotalObitos = arrayTotalObitos.sort(sortfunction)
+	   	  arrayTotalRecuperados = arrayTotalRecuperados.sort(sortfunction)
+	   	  	   	  
+	   	  chart.series[0].setData(arrayTotalCasos),
+	   	  chart.series[1].setData(arrayTotalObitos),
+	   	  chart.series[2].setData(arrayTotalRecuperados)
+	   	  
+	   	  
+	   	  console.log(arrayTotalCasos)
+	   	   console.log(arrayTotalObitos)
+	   	  	   
+	    })
+	  
+	}
+	
+	function parseDate(str)	{
+	  var parts = str.split('/');
+	  	  
+	  return Date.UTC("20"+parts[2], parts[1] - 1, parts[0]); 
+	}
 
+	function sortfunction(a, b){
+	  return (a.x - b.x) //faz com que o array seja ordenado numericamente e de ordem crescente.
+	}
 })

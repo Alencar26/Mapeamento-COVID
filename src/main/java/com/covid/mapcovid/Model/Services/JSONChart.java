@@ -1,20 +1,18 @@
 package com.covid.mapcovid.Model.Services;
 
-
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class JsonContinent {
+public class JSONChart {
+	
+	public static String GetHistorical(String country) throws IOException, InterruptedException {
 
-    public static String GetContinent(String continent) throws IOException, InterruptedException {
-
-    	System.out.println(continent);
+    	System.out.println(country);
     	
-        final String URL_POST = "https://corona.lmao.ninja/v2/continents/" + continent + "?yesterday&strict&query";
+        final String URL_POST = "https://disease.sh/v3/covid-19/historical/"+ country +"?lastdays=15";
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
@@ -27,7 +25,5 @@ public class JsonContinent {
         return response.body();
 
     }  
-}
-	
-	
 
+}

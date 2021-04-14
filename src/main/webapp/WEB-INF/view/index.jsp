@@ -8,11 +8,17 @@
 		<title>Mapeamento COVID-19</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-		<link rel="icon" href="https://www.flaticon.com/svg/vstatic/svg/3209/3209992.svg?token=exp=1616641725~hmac=6b84deccdba98ecc7a095b842f29204a">
+		<link rel="icon" href="../../img/virus.png">
 		<link rel="stylesheet" href="../../styles/style.css">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 		<script src="../../js/script.js"></script>
 		<link rel="stylesheet" href="../../styles/style.css">
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/data.js"></script>
+		<script src="https://code.highcharts.com/modules/series-label.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script src="https://code.highcharts.com/modules/export-data.js"></script>
+		<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 	</head>
 	<body class="bg-cinza">
 		<nav class="navbar navbar-expand-lg navbar-light bg-cinza">
@@ -215,16 +221,7 @@
 							      </div>
 							  	</div>    
 							  </div>
-							  <div class="col">
-							    <div class="card bg-cinza border-0">
-							      <div class="card-body">
-							        <h6 class="card-title fs-5">Ocup. Hospitalar</h6>
-							        <h5 class="card-text text-light text-left mx-4">98%</h5>
-							      </div>
-							  	</div>    
-							  </div>
-							  <div class="col">
-
+							  <div class="col d-none">
 							    <div class="card bg-cinza border-0">
 							      <div class="card-body">
 							        <h6 class="card-title fs-5">Situação</h6>
@@ -235,7 +232,11 @@
 							</div>
 	    				</div>
 	    			</div>
-
+					<div class="col-12">
+						<figure class="highcharts-figure">
+					  		<div id="container"></div>
+						</figure>
+					</div>
 	    		</div>
 	    	</div>
 	    </div>
