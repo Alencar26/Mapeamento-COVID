@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+
+body{
+	font-family: 'Quicksand', sans-serif;
+}
+
+.bg-cinza{
+	background-color:#191A1A;	
+}
+
+.mapdiv path {
+    fill: #191A1A;
+    stroke: #858893;
+    transition: fill 0.3s;
+}
+
+.mapdiv :hover {
+    fill: rgb(156, 223, 79);
+}
+
+.card-title{
+	font-size: 16px;
+	color:#bdbdbd;
+}
+
+.card-text{
+	font-size: 18px;
+}
+
+.card{
+	height:70px;
+	padding-right:0px;
+}
+
+@media(max-width: 375px){
+	#svgMapa {
+   	 	height:450px !important;
+	}
+	
+	footer{
+		position:relative !important;
+	}
+}
+
+@media(min-width: 375px) and (max-width: 767.98px){
+	#svgMapa {
+   	 	height:450px !important;
+   	 	margin-top:50px;
+   	 	margin-bottom:20px;
+	}
+	
+	footer{
+		position:relative !important;
+	}
+}
+
+@media(max-width: 576px){
+	.card-title{
+		font-size: 15px;
+		color:#bdbdbd;
+	}
+}
+
+
+@media(min-width: 768px) and (max-width: 991.98px){
+	#svgMapa {
+   	 	height:380px !important;
+   	 	margin-bottom:20px;
+   	 	margin-top:10px;
+	}
+	
+	footer{
+		position:relative !important;
+	}
+}
