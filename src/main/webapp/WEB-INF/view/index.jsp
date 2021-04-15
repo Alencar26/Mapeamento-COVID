@@ -26,9 +26,15 @@
 		    <a class="navbar-brand text-light fw-bold fs-3" href="/">Mapeamento COVID-19</a>
 		      <div class="d-flex mt-2">
 		     
-				<img src="../../img/shield_baixo.png" class="me-2" width="50px">	
-				<img src="../../img/shield_constante.png" class="me-2" width="50px">		      	 
-				<img src="../../img/shield_alto.png" class="me-3" width="50px">		      	 
+				<span href="#" data-toggle="popover" title="Parcela da População" data-bs-content="Um caso confirmado entre 51 pessoas ou mais" data-bs-trigger="hover focus">
+					<img src="../../img/shield_baixo.png" class="me-2" width="50px">	
+				</span>
+				<span href="#" data-toggle="popover" title="Parcela da População" data-bs-content="Um caso confirmado entre 21 e 50 pessoas" data-bs-trigger="hover focus">
+					<img src="../../img/shield_constante.png" class="me-2" width="50px">
+				</span>
+				<span data-toggle="popover" title="Parcela da População" data-bs-content="Um caso confirmado entre até 20 pessoas" data-bs-trigger="hover focus">	      	 
+					<img src="../../img/shield_alto.png" class="me-3" width="50px">		      	 
+				</span>
 					      	 
 		      <!-- 
 		        <li class="nav-item ms-5">
@@ -201,19 +207,17 @@
         				</svg> 
     				</div>
 				</div>
-	    		<div class="col-12 col-sm-5 col-md-12 col-lg-4 order-2 order-md-3">
+	    		<div class="col-12 col-sm-5 col-md-12 col-lg-5 order-2 order-md-3 pe-5">
 	    			<div class="row mb-4 mb-md-0">
 	    				<div class="col-12 d-none d-lg-block">
-
 							<div style='vertical-align:middle; display:inline;' class="text-light">
 								<span class="text-light fs-1 fw-bold ms-3" id="nomePais"> ${nomePais}</span>
 							</div>
 							<img style='vertical-align:middle;' src="${bandeira}" id="bandeira" width="60px" height="40px" class="rounded ms-3 mb-1 mt-1">
 	    				</div>
 	    				<div class="col">
-	    				  <div class="row row-cols-1 row row-cols-md-3 row row-cols-lg-1 g-0 mt-3 mt-sm-0">	    					
-							  <div class="col">
-
+	    				  <div class="row row-cols-1 row-cols-lg-2 g-0 mt-3 mt-sm-0 mb-2">	    					
+							  <div class="col-8">
 							    <div class="card bg-cinza border-0">
 							      <div class="card-body">
 							        <h6 class="card-title fs-5">População</h6>
@@ -221,11 +225,11 @@
 							      </div>
 							  	</div>    
 							  </div>
-							  <div class="col d-none">
+							  <div class="col-8">
 							    <div class="card bg-cinza border-0">
-							      <div class="card-body">
-							        <h6 class="card-title fs-5">Situação</h6>
-							        <h5 class="card-text fw-bold text-left mx-4 fs-4" id="situacao" style="color:${cor}; ">${situacao}</h5>
+							      <div class="card-body" style="padding:1rem 0rem;">
+							        <h6 class="card-title fs-5">Parcela da população</h6>
+							        <h6 class="card-text fw-bold text-left mx-4" id="situacao" style="color:${cor}; "> ${situacao} casos por  milhão</h6>
 							      </div>
 							  	</div>    
 							  </div>
@@ -248,7 +252,6 @@
 	    			</div>
 		    		<div class="col-12">
 		    			<div class="row row-cols-1 row-cols-sm-3  row-cols-xl-6 g-0">
-		    				
 						  <div class="col">
 						    <div class="card bg-cinza border-0">
 						      <div class="row g-0">
@@ -300,5 +303,8 @@
 	    		</div>
 	    	</div>
 	    </footer>
+	    
+	   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+	   
 	</body>
 </html>

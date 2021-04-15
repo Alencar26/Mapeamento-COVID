@@ -4,6 +4,8 @@ $(document).ready(function(){
 	
 	var url = window.location;
 	
+  	$('[data-toggle="popover"]').popover();
+	
 	$("#bandeira").hide();
 	$("#bandeira-sm").hide();
 	$("#bandeira-md").hide();
@@ -111,17 +113,17 @@ $(document).ready(function(){
 					$("#hojeObitos").html(result.todayDeaths.toLocaleString());
 					$("#hojeRecuperados").html(result.todayRecovered.toLocaleString());
 					
-					if(result.casesPerOneMillion >= 50000){
-                        $("#situacao").html("Alta");
+					if(result.oneCasePerPeople <= 20){
+                        $("#situacao").html("1 caso a cada "+result.oneCasePerPeople+" pessoas");
                         $("#situacao").css("color", "red");
                        	$("#"+event.target.id).css("fill", "#c62828");
                        	
-                    } else if(result.casesPerOneMillion >= 40000){
-                        $("#situacao").html("Constante");
+                    } else if(result.oneCasePerPeople >= 21 && result.oneCasePerPeople <= 50){
+                        $("#situacao").html("1 caso a cada "+result.oneCasePerPeople+" pessoas");
                         $("#situacao").css("color", "#F5CA7B");
                         $("#"+event.target.id).css("fill", "#F5CA7B");
                     } else {
-                        $("#situacao").html("Baixo");
+                        $("#situacao").html("1 caso a cada "+result.oneCasePerPeople+" pessoas");
                         $("#situacao").css("color", "#5BC1AE");
                          $("#"+event.target.id).css("fill", "#5BC1AE");
                     }
@@ -307,7 +309,6 @@ $(document).ready(function(){
 		   	  chart.series[1].setData(arrayTotalObitos),
 		   	  chart.series[2].setData(arrayTotalRecuperados)
 		   	  
-		   	  console.log(objPais)
 		  }
 	   	 	
 	    })
@@ -365,23 +366,22 @@ $(document).ready(function(){
 			   	  
 			   	  for (var prop in totalRecuperados){
  					var index = arrayTotalRecuperados.find(elements => elements.x == new Date(prop).getTime())
-			   	  	index.y += totalRecuperados[prop] 			   	  }
+			   	  	index.y += totalRecuperados[prop] 			   	  
+			   	  }
 			   	  
 			   	  
 	    		}
 	    	}
 	    	
-	    	
-	    	console.log(arrayTotalCasos)
-	    	
-	    	  arrayTotalCasos = arrayTotalCasos.sort(sortfunction)
-		   	  arrayTotalObitos = arrayTotalObitos.sort(sortfunction)
-		   	  arrayTotalRecuperados = arrayTotalRecuperados.sort(sortfunction)
-		   	  	   	  		   	  	   	  
-		   	  chart.series[0].setData(arrayTotalCasos),
-		   	  chart.series[1].setData(arrayTotalObitos),
-		   	  chart.series[2].setData(arrayTotalRecuperados)
-		   	  
+	    	    	
+    	  arrayTotalCasos = arrayTotalCasos.sort(sortfunction)
+	   	  arrayTotalObitos = arrayTotalObitos.sort(sortfunction)
+	   	  arrayTotalRecuperados = arrayTotalRecuperados.sort(sortfunction)
+	   	  	   	  		   	  	   	  
+	   	  chart.series[0].setData(arrayTotalCasos),
+	   	  chart.series[1].setData(arrayTotalObitos),
+	   	  chart.series[2].setData(arrayTotalRecuperados)
+	   	  
 	    })
 	}
 	

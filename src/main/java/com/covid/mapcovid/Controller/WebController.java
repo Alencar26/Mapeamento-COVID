@@ -34,19 +34,9 @@ public class WebController {
         model.addAttribute("hojeObitos", NumberFormat.getIntegerInstance().format(continentSelect.getTodayDeaths()));
         model.addAttribute("hojeRecuperados", NumberFormat.getIntegerInstance().format(continentSelect.getTodayRecovered()));
         
-        if(continentSelect.getCasesPerOneMillion() >= 50000){
-       	 	model.addAttribute("situacao", "Alta");	
-       	 	model.addAttribute("cor", "red");	
+   	 	model.addAttribute("situacao", NumberFormat.getIntegerInstance().format(continentSelect.getCasesPerOneMillion()));	
+   	 	model.addAttribute("cor", "white");	
 
-        } else if(continentSelect.getCasesPerOneMillion() >= 40000){
-       	 	model.addAttribute("situacao", "Constante");
-       	 	model.addAttribute("cor", "#F5CA7B");	
-
-        } else {
-       	 	model.addAttribute("situacao", "Baixo");	
-       	 	model.addAttribute("cor", "#5BC1AE");	
-
-        }
         
         return "index";
     }
