@@ -7,6 +7,7 @@ $(document).ready(function(){
 	$("#bandeira").hide();
 	$("#bandeira-sm").hide();
 	$("#bandeira-md").hide();
+	$("#dataHoje").html(new Date().toLocaleDateString());
 	
 	var objPais = [
 		{
@@ -68,9 +69,6 @@ $(document).ready(function(){
 		ajaxPost(event);
 	});
 	
-	
-	
-	
 	function ajaxPost(event){
 	
 		var formData = {}
@@ -105,6 +103,7 @@ $(document).ready(function(){
 					$("#populacao").html(result.population.toLocaleString());
 					$("#totalTestes").html(result.tests.toLocaleString());
 					$("#totalCriticos").html(result.critical.toLocaleString());
+					
 					console.log(result)
 
 					
@@ -126,6 +125,8 @@ $(document).ready(function(){
                         $("#situacao").css("color", "#5BC1AE");
                          $("#"+event.target.id).css("fill", "#5BC1AE");
                     }
+                    
+                    getData(event.target.id)
 					
 				},
 				error : function(e) {
@@ -141,11 +142,47 @@ $(document).ready(function(){
 	  chart: {
 	    type: 'spline',
 	    events: {
-	    	load: getData
+	    	load: getDataContinent
 	    }
 	  },
+	  legend: {
+        itemStyle: {
+            color: 'white',
+            fontWeight: 'bold'
+        }
+      },
+      lang: {
+      	contextButtonTitle: 'Exportar gráfico',
+      	decimalPoint: ',',
+        thousandsSep: '.',
+      	downloadJPEG: 'Baixar imagem JPEG',
+		downloadPDF: 'Baixar arquivo PDF',
+		downloadPNG: 'Baixar imagem PNG',
+		downloadSVG: 'Baixar vetor SVG',
+		downloadCSV: 'Baixar arquivo CSV',
+		downloadXLS: 'Baixar arquivo XLS',
+		printChart: 'Imprimir gráfico',
+		viewFullscreen: 'Visualizar Tela Cheia',
+		viewData: 'Visualizar dados',
+		hideData: 'Esconder dados'
+      },
+      navigation: {
+        menuStyle: {
+            background: '#E0E0E0'
+        }
+      },
+      exporting: {
+        buttons: {
+            contextButton: {
+                symbolStroke: "white",
+                theme: {
+            		fill:"#191A1A"
+        		}
+            }
+        }
+      },
 	  title: {
-	    text: 'COVID-19'
+	    text: 'COVID-19 - Últimos 30 dias'
 	  },
 	  subtitle: {
 	    text: 'Total de Infectados, Óbitos e Recuperados'
@@ -154,12 +191,21 @@ $(document).ready(function(){
 		  type: 'datetime',
 		  labels: {
 		    format: '{value:%d-%m-%Y}',
-		}
+		    style: {
+                color: 'white'
+            }
+		  },
+		 
 	},
 	yAxis: {
 	    title: {
 	      text: 'Total'
 	    },
+	    labels: {
+		    style: {
+                color: 'white'
+            }
+		  },
 	    min: 0
 	  },
 	 tooltip: {
@@ -175,11 +221,11 @@ $(document).ready(function(){
 	    }
 	  },
 	
-	  colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+	  colors: ['#C6A667', '#fa0103', '#5CC3B0', '#036', '#000'],
 	  series: [
 	  	{
 		    name: "Total de Casos",
-		    data: [],
+		    data: []
 	    },
 	    {
 		    name: "Total de Óbitos",
@@ -210,59 +256,133 @@ $(document).ready(function(){
 	var chart = Highcharts.chart('container', options)
 	
 	// Data
-	function getData() {
-	    fetch('https://disease.sh/v3/covid-19/historical/brazil?lastdays=30').then(function(response) {
+	function getData(stringPais) {
+	
+		var pais = ""
+		
+		if(stringPais.type != "load"){
+			if(stringPais == "FrenchGuiana"){
+				pais = 'French%20Guiana'
+			} else {
+				pais = stringPais
+			}
+		} else {
+			pais = "Brazil"
+		}
+			
+	    fetch('https://disease.sh/v3/covid-19/historical/'+pais+'?lastdays=30').then(function(response) {
 	      return response.json()
 	    }).then(function(data) {
 	    
-	      var arrayTotalCasos = []	
-	      var arrayTotalObitos = []	
-	      var arrayTotalRecuperados = []	
-	          
-	   	  var totalCasos = data.timeline.cases
-	   	  
-	   	  for (var prop in totalCasos){
-	   	  	var dateFinal = parseDate(prop)
-	   	  	arrayTotalCasos.push({x: new Date(prop).getTime(),y: totalCasos[prop]}) 
-	   	  }
-	   	  
-	   	  var totalObitos = data.timeline.deaths
-	   	  
-	   	  for (var prop in totalObitos){
-	   	  	var dateFinal = parseDate(prop)
-	   	  	arrayTotalObitos.push({x: new Date(prop).getTime(),y: totalObitos[prop]}) 
-	   	  }
-	   	  
-	   	  var totalRecuperados = data.timeline.recovered
-	   	  
-	   	  for (var prop in totalRecuperados){
-	   	  	var dateFinal = parseDate(prop)
-	   	  	arrayTotalRecuperados.push({x: new Date(prop).getTime(),y: totalRecuperados[prop]}) 
-	   	  }
-	   	  	   	  
-	   	  arrayTotalCasos = arrayTotalCasos.sort(sortfunction)
-	   	  arrayTotalObitos = arrayTotalObitos.sort(sortfunction)
-	   	  arrayTotalRecuperados = arrayTotalRecuperados.sort(sortfunction)
-	   	  	   	  
-	   	  chart.series[0].setData(arrayTotalCasos),
-	   	  chart.series[1].setData(arrayTotalObitos),
-	   	  chart.series[2].setData(arrayTotalRecuperados)
-	   	  
-	   	  
-	   	  console.log(arrayTotalCasos)
-	   	   console.log(arrayTotalObitos)
-	   	  	   
+	      if(data.message){
+	      
+	      }else{
+		      var arrayTotalCasos = []	
+		      var arrayTotalObitos = []	
+		      var arrayTotalRecuperados = []	
+		          
+		   	  var totalCasos = data.timeline.cases
+		   	  
+		   	  for (var prop in totalCasos){
+		   	  	arrayTotalCasos.push({x: new Date(prop).getTime(),y: totalCasos[prop]}) 
+		   	  }
+		   	  
+		   	  var totalObitos = data.timeline.deaths
+		   	  
+		   	  for (var prop in totalObitos){
+		   	  	arrayTotalObitos.push({x: new Date(prop).getTime(),y: totalObitos[prop]}) 
+		   	  }
+		   	  
+		   	  var totalRecuperados = data.timeline.recovered
+		   	  
+		   	  for (var prop in totalRecuperados){
+		   	  	arrayTotalRecuperados.push({x: new Date(prop).getTime(),y: totalRecuperados[prop]}) 
+		   	  }
+		   	  	   	  
+		   	  arrayTotalCasos = arrayTotalCasos.sort(sortfunction)
+		   	  arrayTotalObitos = arrayTotalObitos.sort(sortfunction)
+		   	  arrayTotalRecuperados = arrayTotalRecuperados.sort(sortfunction)
+		   	  	   	  		   	  	   	  
+		   	  chart.series[0].setData(arrayTotalCasos),
+		   	  chart.series[1].setData(arrayTotalObitos),
+		   	  chart.series[2].setData(arrayTotalRecuperados)
+		   	  
+		   	  console.log(objPais)
+		  }
+	   	 	
 	    })
 	  
-	}
-	
-	function parseDate(str)	{
-	  var parts = str.split('/');
-	  	  
-	  return Date.UTC("20"+parts[2], parts[1] - 1, parts[0]); 
 	}
 
 	function sortfunction(a, b){
 	  return (a.x - b.x) //faz com que o array seja ordenado numericamente e de ordem crescente.
 	}
+	
+	function getDataContinent() {
+	
+		 var nomePais = [] 
+		 
+		 for(var element in objPais){		 
+		 	nomePais.push(objPais[element].id)
+		 }
+		
+		 fetch('https://disease.sh/v3/covid-19/historical/'+nomePais+'?lastdays=30').then(function(response) {
+	      return response.json()
+	    }).then(function(data) {
+	    
+	     	var arrayTotalCasos = []	
+		    var arrayTotalObitos = []	
+		    var arrayTotalRecuperados = []	
+	    	
+	    	
+	    	for(var element in data[0].timeline.cases){
+	    			arrayTotalCasos.push({x: new Date(element).getTime(),y: 0}) 
+	    			arrayTotalObitos.push({x: new Date(element).getTime(),y: 0}) 	
+	    			arrayTotalRecuperados.push({x: new Date(element).getTime(),y: 0}) 	
+	    	}
+	    	
+	    	for(var element in data){
+	   			
+	   			dataCountry = data[element]
+	   		
+	    		if(dataCountry != null){
+	    		
+	    		  var totalCasos = dataCountry.timeline.cases
+		   	  
+			   	  for (var prop in totalCasos){
+			   	  	 var index = arrayTotalCasos.find(elements => elements.x == new Date(prop).getTime())
+			   	  	 index.y += totalCasos[prop] 
+			   	  }
+			   	    
+			   	  var totalObitos = dataCountry.timeline.deaths
+			   	  
+			   	  for (var prop in totalObitos){
+			   	  	 var index = arrayTotalObitos.find(elements => elements.x == new Date(prop).getTime())
+			   	  	 index.y += totalObitos[prop] 
+			   	  }
+			   	  
+			   	  var totalRecuperados = dataCountry.timeline.recovered
+			   	  
+			   	  for (var prop in totalRecuperados){
+ 					var index = arrayTotalRecuperados.find(elements => elements.x == new Date(prop).getTime())
+			   	  	index.y += totalRecuperados[prop] 			   	  }
+			   	  
+			   	  
+	    		}
+	    	}
+	    	
+	    	
+	    	console.log(arrayTotalCasos)
+	    	
+	    	  arrayTotalCasos = arrayTotalCasos.sort(sortfunction)
+		   	  arrayTotalObitos = arrayTotalObitos.sort(sortfunction)
+		   	  arrayTotalRecuperados = arrayTotalRecuperados.sort(sortfunction)
+		   	  	   	  		   	  	   	  
+		   	  chart.series[0].setData(arrayTotalCasos),
+		   	  chart.series[1].setData(arrayTotalObitos),
+		   	  chart.series[2].setData(arrayTotalRecuperados)
+		   	  
+	    })
+	}
+	
 })

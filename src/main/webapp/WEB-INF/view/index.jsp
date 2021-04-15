@@ -244,7 +244,7 @@
 	    	<div class="container-fluid">
 	    		<div class="row">
 	    			<div class="col-12">
-	    				<span class="text-light fs-5 mx-3">01/04/2020</span>
+	    				<span class="text-light fs-5 mx-3" id="dataHoje"></span>
 	    			</div>
 		    		<div class="col-12">
 		    			<div class="row row-cols-1 row-cols-sm-3  row-cols-xl-6 g-0">

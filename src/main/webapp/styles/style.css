@@ -88,11 +88,12 @@ body{
 	text-align: center;
 	width: 100%;
 	max-width: 500px;
+	backgroud: white;
 }
 .highcharts-data-table caption {
   padding: 1em 0;
   font-size: 1.2em;
-  color: #555;
+  color: #ffffff;
 }
 .highcharts-data-table th {
 	font-weight: 600;
@@ -100,24 +101,35 @@ body{
 }
 .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
   padding: 0.5em;
+  background: white;
 }
 .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-  background: #f8f8f8;
+  background: #f8f8f8 !important;
 }
 .highcharts-data-table tr:hover {
   background: #f1f7ff;
 }
 
-/*.highcharts-background{
+.highcharts-background{
 	fill: #191A1A;
 }
 
-.highcharts-title, .highcharts-subtitle, .highcharts-axis-title, .highcharts-axis-labels, .highcharts-yaxis-labels{
+.highcharts-title, .highcharts-subtitle, .highcharts-axis-title{
 	fill: white !important;
-}*/
+}
 
 .highcharts-a11y-proxy-button{
 	fill: white !important;
 }
+
+.highcharts-axis-labels, .highcharts-yaxis-labels{
+	color: white !important;
+}
+
+.highcharts-contextbutton{
+	fill:yellow !important;
+}
+
+
 
 
