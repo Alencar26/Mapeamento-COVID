@@ -236,6 +236,13 @@
 							</div>
 	    				</div>
 	    			</div>
+	    			<div class="col-5" id="divPesquisa">		   	
+					  	<div class="input-group input-group-sm mt-2 ms-3">
+						  <span class="input-group-text">Gráfico - Últimos </span>
+						  <input type="number" class="form-control" placeholder="30" min=0 id="pesquisaGrafico">
+						  <span class="input-group-text">dias</span>
+						</div>
+					 </div>
 					<div class="col-12">
 						<figure class="highcharts-figure">
 					  		<div id="container"></div>
@@ -244,7 +251,7 @@
 	    		</div>
 	    	</div>
 	    </div>
-	    <footer class="footer fixed-bottom p-md-3 mt-4 mt-lg-0 bg-cinza">
+	    <footer class="footer fixed-bottom p-md-3 p-xl-1 mt-4 mt-lg-0 bg-cinza">
 	    	<div class="container-fluid">
 	    		<div class="row">
 	    			<div class="col-12">

@@ -9,7 +9,10 @@ $(document).ready(function(){
 	$("#bandeira").hide();
 	$("#bandeira-sm").hide();
 	$("#bandeira-md").hide();
+	//$("#divPesquisa").hide();
 	$("#dataHoje").html(new Date().toLocaleDateString());
+	
+	var paisFinal = "";
 	
 	var objPais = [
 		{
@@ -71,15 +74,29 @@ $(document).ready(function(){
 		ajaxPost(event);
 	});
 	
+	$("#pesquisaGrafico").blur(function(event) {
+	
+		if(paisFinal == ""){
+			getDataContinent(event, event.target.value)
+			chart.setTitle({ text: 'Gráfico - Últimos '+ event.target.value +' dias'})
+			
+		}else{
+			getData(paisFinal, event.target.value);
+		}
+	});
+	
 	function ajaxPost(event){
 	
 		var formData = {}
 		
 		if(event.target.id == "FrenchGuiana"){
 			formData = {name: 'French%20Guiana'}
+			paisFinal = 'French%20Guiana'
 		} else {
 			formData = {name: event.target.id}
+			paisFinal = event.target.id
 		}
+		
 		
 		var nomeObj = objPais.find(element => element.id == event.target.id);
 		
@@ -98,20 +115,18 @@ $(document).ready(function(){
 					$("#totalObitos").html(result.deaths.toLocaleString());
 					$("#totalRecuperados").html(result.recovered.toLocaleString());
 					$("#nomePais, #nomePais-sm, #nomePais-md").html(nomeObj.name);
-					$("#bandeira, #bandeira-sm, #bandeira-md").show();
+					$("#bandeira, #bandeira-sm, #bandeira-md, #divPesquisa").show();
 					$("#bandeira").attr('src',result.countryInfo.flag);
 					$("#bandeira-sm").attr('src',result.countryInfo.flag);
 			        $("#bandeira-md").attr('src',result.countryInfo.flag);
 					$("#populacao").html(result.population.toLocaleString());
 					$("#totalTestes").html(result.tests.toLocaleString());
 					$("#totalCriticos").html(result.critical.toLocaleString());
-					
-					console.log(result)
-
-					
+			
 					$("#hojeCasos").html(result.todayCases.toLocaleString());
 					$("#hojeObitos").html(result.todayDeaths.toLocaleString());
 					$("#hojeRecuperados").html(result.todayRecovered.toLocaleString());
+					$("#pesquisaGrafico").val(30);
 					
 					if(result.oneCasePerPeople <= 20){
                         $("#situacao").html("1 caso a cada "+result.oneCasePerPeople+" pessoas");
@@ -128,7 +143,7 @@ $(document).ready(function(){
                          $("#"+event.target.id).css("fill", "#5BC1AE");
                     }
                     
-                    getData(event.target.id)
+                    getData(event.target.id, 0)
 					
 				},
 				error : function(e) {
@@ -258,9 +273,12 @@ $(document).ready(function(){
 	var chart = Highcharts.chart('container', options)
 	
 	// Data
-	function getData(stringPais) {
+	function getData(stringPais, lastDays) {
 	
+		console.log(lastDays)
+		
 		var pais = ""
+		
 		
 		if(stringPais.type != "load"){
 			if(stringPais == "FrenchGuiana"){
@@ -271,8 +289,15 @@ $(document).ready(function(){
 		} else {
 			pais = "Brazil"
 		}
+		
+		if(lastDays == 0){
+			lastDays = 30
+		}
 			
-	    fetch('https://disease.sh/v3/covid-19/historical/'+pais+'?lastdays=30').then(function(response) {
+			
+		chart.setTitle({ text: 'Gráfico - Últimos '+ lastDays +' dias'})
+		
+	    fetch('https://disease.sh/v3/covid-19/historical/'+pais+'?lastdays='+lastDays).then(function(response) {
 	      return response.json()
 	    }).then(function(data) {
 	    
@@ -319,15 +344,21 @@ $(document).ready(function(){
 	  return (a.x - b.x) //faz com que o array seja ordenado numericamente e de ordem crescente.
 	}
 	
-	function getDataContinent() {
+	function getDataContinent(event, lastDays) {
 	
+	
+		console.log(lastDays)
 		 var nomePais = [] 
 		 
 		 for(var element in objPais){		 
 		 	nomePais.push(objPais[element].id)
 		 }
+		 
+		 if(lastDays == 0){
+			lastDays = 30
+		 }
 		
-		 fetch('https://disease.sh/v3/covid-19/historical/'+nomePais+'?lastdays=30').then(function(response) {
+		 fetch('https://disease.sh/v3/covid-19/historical/'+nomePais+'?lastdays='+lastDays).then(function(response) {
 	      return response.json()
 	    }).then(function(data) {
 	    
