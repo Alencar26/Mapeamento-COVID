@@ -53,13 +53,13 @@
 				</div>
 		     
 
-				<span href="#" data-toggle="popover" title="Parcela da Populaï¿½ï¿½o" data-bs-content="Um caso confirmado entre 51 pessoas ou mais" data-bs-trigger="hover focus">
+				<span href="#" data-toggle="popover" title="Parcela da População" data-bs-content="Um caso confirmado entre 51 pessoas ou mais" data-bs-trigger="hover focus">
 					<img src="../../img/shield_baixo.png" class="me-2" width="50px">	
 				</span>
-				<span href="#" data-toggle="popover" title="Parcela da Populaï¿½ï¿½o" data-bs-content="Um caso confirmado entre 21 e 50 pessoas" data-bs-trigger="hover focus">
+				<span href="#" data-toggle="popover" title="Parcela da População" data-bs-content="Um caso confirmado entre 21 e 50 pessoas" data-bs-trigger="hover focus">
 					<img src="../../img/shield_constante.png" class="me-2" width="50px">
 				</span>
-				<span data-toggle="popover" title="Parcela da Populaï¿½ï¿½o" data-bs-content="Um caso confirmado entre atï¿½ 20 pessoas" data-bs-trigger="hover focus">	      	 
+				<span data-toggle="popover" title="Parcela da População" data-bs-content="Um caso confirmado entre até 20 pessoas" data-bs-trigger="hover focus">	      	 
 					<img src="../../img/shield_alto.png" class="me-3" width="50px">		      	 
 				</span>
 					      	 
@@ -108,7 +108,7 @@
 						      <div class="card-body">
 						        <h6 class="card-title ms-2 ms-md-0">Total de Infectados</h6>
 						        <h5 class="card-text text-light ms-2 ms-md-0" id="totalCasos">${totalCasos}</h5>
-						        <span href="porcentagemCasos" data-toggle="popover" title="Porcentagem de casos totais" data-bs-content="Calculo feito com base na população total" data-bs-trigger="hover focus" />
+						        <span href="porcentagemCasos" data-toggle="popover" title="Porcentagem de casos totais" data-bs-content="Calculo feito com base na população total" data-bs-trigger="hover focus" >
 						        <span id="porcentagemCasos" class="card-text text-light ms-2 ms-md-0" >porcentagemCasos</span>
 						      </div>
 						    </div>
@@ -141,8 +141,9 @@
 						    </div>
 						    <div class="col-10">
 						        <div class="card-body">
-						        	<h6 class="card-title ms-2 ms-md-0">Total Casos Crï¿½ticos</h6>
+						        	<h6 class="card-title ms-2 ms-md-0">Total Casos Críticos</h6>
 						        	<h5 class="card-text text-light ms-2 ms-md-0" id="totalCriticos">${totalCriticos}</h5>
+						        	<span href="porcentagemCriticos" data-toggle="popover" title="Porcentagem de casos criticos" data-bs-content="Calculo feito com base no total de casos críticos" data-bs-trigger="hover focus">
 						        	<span id="porcentagemCriticos" class="text-light" >porcentagemCriticos</span>
 						      	</div>
 						    </div>
@@ -157,8 +158,9 @@
 						    </div>
 						    <div class="col-10">
 						        <div class="card-body">
-							        <h6 class="card-title ms-2 ms-md-0">Total de ï¿½bitos</h6>
+							        <h6 class="card-title ms-2 ms-md-0">Total de Óbitos</h6>
 							        <h5 class="card-text text-light ms-2 ms-md-0" id="totalObitos">${totalObitos}</h5>
+							        <span href="porcentagemObitos" data-toggle="popover" title="Porcentagem de óbitos" data-bs-content="Calculo feito com base no total de infectados" data-bs-trigger="hover focus">
 							        <span id="porcentagemObitos" class="text-light" >porcentagemObitos</span>
 						      	</div>
 						    </div>
@@ -175,6 +177,7 @@
 						        <div class="card-body">
 							        <h6 class="card-title ms-2 ms-md-0">Total de Recuperados</h6>
 							        <h5 class="card-text text-light ms-2 ms-md-0" id="totalRecuperados">${totalRecuperados}</h5>
+							        <span href="porcentagemRecuperados" data-toggle="popover" title="Porcentagem de recuperados" data-bs-content="Calculo feito com base no total de infectados" data-bs-trigger="hover focus">
 							        <span id="porcentagemRecuperados" class="text-light" >porcentagemRecuperados</span>
 						      	</div>
 						    </div>
@@ -191,6 +194,7 @@
 						        <div class="card-body">
 							        <h6 class="card-title ms-2 ms-md-0">Total de Testes</h6>
 							        <h5 class="card-text text-light ms-2 ms-md-0" id="totalTestes">${totalTestes}</h5>
+							        <span href="porcentagemTestes" data-toggle="popover" title="Porcentagem de testes" data-bs-content="Calculo aproximado feito com base na população total" data-bs-trigger="hover focus">
 							        <span id="porcentagemTestes" class="text-light" >porcentagemTestes</span>
 						      	</div>
 						    </div>
@@ -255,7 +259,7 @@
 							  <div class="col-8">
 							    <div class="card bg-cinza border-0">
 							      <div class="card-body">
-							        <h6 class="card-title fs-5">Populaï¿½ï¿½o</h6>
+							        <h6 class="card-title fs-5">População</h6>
 							        <h5 class="card-text text-light text-left mx-4" id="populacao">${populacao}</h5>
 							      </div>
 							  	</div>    
@@ -263,8 +267,8 @@
 							  <div class="col-8">
 							    <div class="card bg-cinza border-0">
 							      <div class="card-body" style="padding:1rem 0rem;">
-							        <h6 class="card-title fs-5">Parcela da populaï¿½ï¿½o</h6>
-							        <h6 class="card-text fw-bold text-left mx-4" id="situacao" style="color:${cor}; "> ${situacao} casos por  milhï¿½o</h6>
+							        <h6 class="card-title fs-5">Parcela da população</h6>
+							        <h6 class="card-text fw-bold text-left mx-4" id="situacao" style="color:${cor}; "> ${situacao} casos por  milhão</h6>
 							      </div>
 							  	</div>    
 							  </div>
@@ -321,7 +325,7 @@
 							    </div>
 							    <div class="col-10 col-sm-9">
 							        <div class="card-body">
-								        <h6 class="card-title ms-2 ms-md-0">ï¿½bitos</h6>
+								        <h6 class="card-title ms-2 ms-md-0">Óbitos</h6>
 								        <h5 class="card-text text-light ms-2 ms-md-0" id="hojeObitos">${hojeObitos}</h5>
 							      	</div>
 							    </div>
