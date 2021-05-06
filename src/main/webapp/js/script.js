@@ -303,6 +303,13 @@ $(document).ready(function(){
 	// Data
 	function getData(stringPais, lastDays) {
 	
+		var ultimosDias = lastDays;
+
+		var seletor = $("#selectPesquisa option:selected").val();
+		
+		if(seletor == "mes")
+			ultimosDias = ultimosDias / 30;
+
 		console.log(lastDays)
 		
 		var pais = ""
@@ -318,12 +325,13 @@ $(document).ready(function(){
 			pais = "Brazil"
 		}
 		
-		if(lastDays == 0){
+		if(lastDays == 0 || ultimosDias == 0){
 			lastDays = 30
+			ultimosDias = 1
 		}
 			
-			
-		chart.setTitle({ text: 'Gráfico - Últimos '+ lastDays +' dias'})
+		chart.setTitle(seletor == "dia" ? { text: 'Gráfico - Últimos '+ lastDays +' dias'} : { text: 'Gráfico - Últimos '+ ultimosDias +' meses' })
+		
 		
 	    fetch('https://disease.sh/v3/covid-19/historical/'+pais+'?lastdays='+lastDays).then(function(response) {
 	      return response.json()
