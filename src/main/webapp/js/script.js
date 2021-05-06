@@ -85,7 +85,7 @@ $(document).ready(function(){
 
 		if(paisFinal == ""){
 			getDataContinent(event, ultimosDias)
-			chart.setTitle({ text: 'Gráfico - Últimos '+ ultimosDias +' dias'})
+			chart.setTitle(seletor == "dia" ? { text: 'Gráfico - Últimos '+ ultimosDias +' dias'} : { text: 'Gráfico - Últimos '+ event.target.value +' meses' })
 			
 		}else{
 			getData(paisFinal, ultimosDias);
