@@ -76,12 +76,19 @@ $(document).ready(function(){
 	
 	$("#pesquisaGrafico").blur(function(event) {
 	
+		var ultimosDias = event.target.value;
+
+		var seletor = $("#selectPesquisa option:selected").val();
+		
+		if(seletor == "mes")
+			ultimosDias = ultimosDias * 30;
+
 		if(paisFinal == ""){
-			getDataContinent(event, event.target.value)
-			chart.setTitle({ text: 'Gráfico - Últimos '+ event.target.value +' dias'})
+			getDataContinent(event, ultimosDias)
+			chart.setTitle(seletor == "dia" ? { text: 'Gráfico - Últimos '+ ultimosDias +' dias'} : { text: 'Gráfico - Últimos '+ event.target.value +' meses' })
 			
 		}else{
-			getData(paisFinal, event.target.value);
+			getData(paisFinal, ultimosDias);
 		}
 	});
 	
@@ -178,6 +185,7 @@ $(document).ready(function(){
 	var options = {
 	  chart: {
 	    type: 'spline',
+		zoomType: 'x',
 	    events: {
 	    	load: getDataContinent
 	    }

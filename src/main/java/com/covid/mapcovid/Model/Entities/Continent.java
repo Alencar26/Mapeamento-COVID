@@ -251,6 +251,8 @@ public class Continent {
 					+ ", oneTestPerPeople=" + oneTestPerPeople + ", activePerOneMillion=" + activePerOneMillion
 					+ ", recoveredPerOneMillion=" + recoveredPerOneMillion + ", criticalPerOneMillion="
 					+ criticalPerOneMillion + "]";
+			
+			
 		}
 	}
 
