@@ -158,6 +158,7 @@ $(document).ready(function(){
 	var options = {
 	  chart: {
 	    type: 'spline',
+		zoomType: 'x',
 	    events: {
 	    	load: getDataContinent
 	    }
