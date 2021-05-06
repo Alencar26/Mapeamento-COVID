@@ -1,5 +1,419 @@
 
-jQuery(document).ready(function(){
-jQuery("#mapsvg").mapSvg({width: 355.74203,height: 588.58795,colors: {
-	baseDefault: "#000000",background: "#000000",selected: 40,hover: 20,directory: "#fafafa",status: {},base: "#25011e"},viewBox: [0,0,355.74203,588.58795],cursor: "pointer",gauge: {on: false,labels: {low: "low",high: "high"},colors: {lowRGB: {r: 85,g: 0,b: 0,a: 1},highRGB: {r: 238,g: 0,b: 0,a: 1},low: "#550000",high: "#ee0000",diffRGB: {r: 153,g: 0,b: 0,a: 0}},min: 0,max: false},source: "/mapsvg/maps/not-calibrated/south-america.svg",title: "South-america",responsive: true});
-});
+
+$(document).ready(function(){
+	
+	var url = window.location;
+	
+  	$('[data-toggle="popover"]').popover();
+	
+	$("#bandeira").hide();
+	$("#bandeira-sm").hide();
+	$("#bandeira-md").hide();
+	//$("#divPesquisa").hide();
+	$("#dataHoje").html(new Date().toLocaleDateString());
+	
+	var paisFinal = "";
+	
+	var objPais = [
+		{
+			id: "Argentina",
+			name: "Argentina"
+		}, 
+		{
+			id: "Bolivia",
+			name: "Bolívia"
+		},
+		{
+			id: "Brazil",
+			name: "Brasil"
+		},
+		{
+			id: "Chile",
+			name: "Chile"
+		},
+		{
+			id: "Colombia",
+			name: "Colômbia"
+		},
+		{
+			id: "Ecuador",
+			name: "Equador"
+		},
+		{
+			id: "FrenchGuiana",
+			name: "Guiana Francesa"
+		},
+			{
+			id: "Guyana",
+			name: "Guiana"
+		},
+			{
+			id: "Peru",
+			name: "Peru"
+		},
+		{
+			id: "Paraguay",
+			name: "Paraguai"
+		},
+		{
+			id: "Suriname",
+			name: "Suriname"
+		},
+		{
+			id: "Uruguay",
+			name: "Uruguai"
+		},
+		{
+			id: "Venezuela",
+			name: "Venezuela"
+		}
+	]
+	
+	
+    $("#Argentina, #Bolivia, #Brazil, #Chile, #Colombia, #Ecuador, #FrenchGuiana, #Guyana, #Peru, #Paraguay, #Suriname, #Uruguay, #Venezuela").click(function(event) {
+		ajaxPost(event);
+	});
+	
+	$("#pesquisaGrafico").blur(function(event) {
+	
+		if(paisFinal == ""){
+			getDataContinent(event, event.target.value)
+			chart.setTitle({ text: 'Gráfico - Últimos '+ event.target.value +' dias'})
+			
+		}else{
+			getData(paisFinal, event.target.value);
+		}
+	});
+	
+	function ajaxPost(event){
+	
+		var formData = {}
+		
+		if(event.target.id == "FrenchGuiana"){
+			formData = {name: 'French%20Guiana'}
+			paisFinal = 'French%20Guiana'
+		} else {
+			formData = {name: event.target.id}
+			paisFinal = event.target.id
+		}
+		
+		
+		var nomeObj = objPais.find(element => element.id == event.target.id);
+		
+		$(".mapdiv path").css("fill", "#191A1A");
+		
+		
+		$.ajax({
+				type : "POST",
+				contentType : "application/json",
+				url : url + "countryJSON",
+				data : JSON.stringify(formData),
+				dataType : "json",
+				success : function(result) {
+					$("#totalCasos").html(result.cases.toLocaleString());
+					$("#totalAtivos").html(result.active.toLocaleString());
+					$("#totalObitos").html(result.deaths.toLocaleString());
+					$("#totalRecuperados").html(result.recovered.toLocaleString());
+					$("#nomePais, #nomePais-sm, #nomePais-md").html(nomeObj.name);
+					$("#bandeira, #bandeira-sm, #bandeira-md, #divPesquisa").show();
+					$("#bandeira").attr('src',result.countryInfo.flag);
+					$("#bandeira-sm").attr('src',result.countryInfo.flag);
+			        $("#bandeira-md").attr('src',result.countryInfo.flag);
+					$("#populacao").html(result.population.toLocaleString());
+					$("#totalTestes").html(result.tests.toLocaleString());
+					$("#totalCriticos").html(result.critical.toLocaleString());
+			
+					$("#hojeCasos").html(result.todayCases.toLocaleString());
+					$("#hojeObitos").html(result.todayDeaths.toLocaleString());
+					$("#hojeRecuperados").html(result.todayRecovered.toLocaleString());
+					$("#pesquisaGrafico").val(30);
+					
+					if(result.oneCasePerPeople <= 20){
+                        $("#situacao").html("1 caso a cada "+result.oneCasePerPeople+" pessoas");
+                        $("#situacao").css("color", "red");
+                       	$("#"+event.target.id).css("fill", "#c62828");
+                       	
+                    } else if(result.oneCasePerPeople >= 21 && result.oneCasePerPeople <= 50){
+                        $("#situacao").html("1 caso a cada "+result.oneCasePerPeople+" pessoas");
+                        $("#situacao").css("color", "#F5CA7B");
+                        $("#"+event.target.id).css("fill", "#F5CA7B");
+                    } else {
+                        $("#situacao").html("1 caso a cada "+result.oneCasePerPeople+" pessoas");
+                        $("#situacao").css("color", "#5BC1AE");
+                         $("#"+event.target.id).css("fill", "#5BC1AE");
+                    }
+                    
+                    getData(event.target.id, 0)
+					
+				},
+				error : function(e) {
+					alert("Error!")
+					console.log("ERROR: ", e);
+				}
+			});
+	}
+	
+	
+	
+	var options = {
+	  chart: {
+	    type: 'spline',
+	    events: {
+	    	load: getDataContinent
+	    }
+	  },
+	  legend: {
+        itemStyle: {
+            color: 'white',
+            fontWeight: 'bold'
+        }
+      },
+      lang: {
+      	contextButtonTitle: 'Exportar gráfico',
+      	decimalPoint: ',',
+        thousandsSep: '.',
+      	downloadJPEG: 'Baixar imagem JPEG',
+		downloadPDF: 'Baixar arquivo PDF',
+		downloadPNG: 'Baixar imagem PNG',
+		downloadSVG: 'Baixar vetor SVG',
+		downloadCSV: 'Baixar arquivo CSV',
+		downloadXLS: 'Baixar arquivo XLS',
+		printChart: 'Imprimir gráfico',
+		viewFullscreen: 'Visualizar Tela Cheia',
+		viewData: 'Visualizar dados',
+		hideData: 'Esconder dados'
+      },
+      navigation: {
+        menuStyle: {
+            background: '#E0E0E0'
+        }
+      },
+      exporting: {
+        buttons: {
+            contextButton: {
+                symbolStroke: "white",
+                theme: {
+            		fill:"#191A1A"
+        		}
+            }
+        }
+      },
+	  title: {
+	    text: 'COVID-19 - Últimos 30 dias'
+	  },
+	  subtitle: {
+	    text: 'Total de Infectados, Óbitos e Recuperados'
+	  },
+	  xAxis: {
+		  type: 'datetime',
+		  labels: {
+		    format: '{value:%d-%m-%Y}',
+		    style: {
+                color: 'white'
+            }
+		  },
+		 
+	},
+	yAxis: {
+	    title: {
+	      text: 'Total'
+	    },
+	    labels: {
+		    style: {
+                color: 'white'
+            }
+		  },
+	    min: 0
+	  },
+	 tooltip: {
+        shared: true,
+        crosshairs: true
+    },
+	
+	  plotOptions: {
+	    series: {
+	      marker: {
+	        enabled: true
+	      }
+	    }
+	  },
+	
+	  colors: ['#C6A667', '#fa0103', '#5CC3B0', '#036', '#000'],
+	  series: [
+	  	{
+		    name: "Total de Casos",
+		    data: []
+	    },
+	    {
+		    name: "Total de Óbitos",
+		    data: [] 
+		},
+		{
+		    name: "Total de Recuperados",
+		    data: [] 
+		}
+	  ],
+	  responsive: {
+		    rules: [{
+		      condition: {
+		        maxWidth: 700
+		      },
+		      chartOptions: {
+		        plotOptions: {
+		          series: {
+		            marker: {
+		              radius: 2.5
+		            }
+		          }
+		        }
+		      }
+		    }]
+		}
+	};
+	var chart = Highcharts.chart('container', options)
+	
+	// Data
+	function getData(stringPais, lastDays) {
+	
+		console.log(lastDays)
+		
+		var pais = ""
+		
+		
+		if(stringPais.type != "load"){
+			if(stringPais == "FrenchGuiana"){
+				pais = 'French%20Guiana'
+			} else {
+				pais = stringPais
+			}
+		} else {
+			pais = "Brazil"
+		}
+		
+		if(lastDays == 0){
+			lastDays = 30
+		}
+			
+			
+		chart.setTitle({ text: 'Gráfico - Últimos '+ lastDays +' dias'})
+		
+	    fetch('https://disease.sh/v3/covid-19/historical/'+pais+'?lastdays='+lastDays).then(function(response) {
+	      return response.json()
+	    }).then(function(data) {
+	    
+	      if(data.message){
+	      
+	      }else{
+		      var arrayTotalCasos = []	
+		      var arrayTotalObitos = []	
+		      var arrayTotalRecuperados = []	
+		          
+		   	  var totalCasos = data.timeline.cases
+		   	  
+		   	  for (var prop in totalCasos){
+		   	  	arrayTotalCasos.push({x: new Date(prop).getTime(),y: totalCasos[prop]}) 
+		   	  }
+		   	  
+		   	  var totalObitos = data.timeline.deaths
+		   	  
+		   	  for (var prop in totalObitos){
+		   	  	arrayTotalObitos.push({x: new Date(prop).getTime(),y: totalObitos[prop]}) 
+		   	  }
+		   	  
+		   	  var totalRecuperados = data.timeline.recovered
+		   	  
+		   	  for (var prop in totalRecuperados){
+		   	  	arrayTotalRecuperados.push({x: new Date(prop).getTime(),y: totalRecuperados[prop]}) 
+		   	  }
+		   	  	   	  
+		   	  arrayTotalCasos = arrayTotalCasos.sort(sortfunction)
+		   	  arrayTotalObitos = arrayTotalObitos.sort(sortfunction)
+		   	  arrayTotalRecuperados = arrayTotalRecuperados.sort(sortfunction)
+		   	  	   	  		   	  	   	  
+		   	  chart.series[0].setData(arrayTotalCasos),
+		   	  chart.series[1].setData(arrayTotalObitos),
+		   	  chart.series[2].setData(arrayTotalRecuperados)
+		   	  
+		  }
+	   	 	
+	    })
+	  
+	}
+
+	function sortfunction(a, b){
+	  return (a.x - b.x) //faz com que o array seja ordenado numericamente e de ordem crescente.
+	}
+	
+	function getDataContinent(event, lastDays) {
+	
+	
+		console.log(lastDays)
+		 var nomePais = [] 
+		 
+		 for(var element in objPais){		 
+		 	nomePais.push(objPais[element].id)
+		 }
+		 
+		 if(lastDays == 0){
+			lastDays = 30
+		 }
+		
+		 fetch('https://disease.sh/v3/covid-19/historical/'+nomePais+'?lastdays='+lastDays).then(function(response) {
+	      return response.json()
+	    }).then(function(data) {
+	    
+	     	var arrayTotalCasos = []	
+		    var arrayTotalObitos = []	
+		    var arrayTotalRecuperados = []	
+	    	
+	    	
+	    	for(var element in data[0].timeline.cases){
+	    			arrayTotalCasos.push({x: new Date(element).getTime(),y: 0}) 
+	    			arrayTotalObitos.push({x: new Date(element).getTime(),y: 0}) 	
+	    			arrayTotalRecuperados.push({x: new Date(element).getTime(),y: 0}) 	
+	    	}
+	    	
+	    	for(var element in data){
+	   			
+	   			dataCountry = data[element]
+	   		
+	    		if(dataCountry != null){
+	    		
+	    		  var totalCasos = dataCountry.timeline.cases
+		   	  
+			   	  for (var prop in totalCasos){
+			   	  	 var index = arrayTotalCasos.find(elements => elements.x == new Date(prop).getTime())
+			   	  	 index.y += totalCasos[prop] 
+			   	  }
+			   	    
+			   	  var totalObitos = dataCountry.timeline.deaths
+			   	  
+			   	  for (var prop in totalObitos){
+			   	  	 var index = arrayTotalObitos.find(elements => elements.x == new Date(prop).getTime())
+			   	  	 index.y += totalObitos[prop] 
+			   	  }
+			   	  
+			   	  var totalRecuperados = dataCountry.timeline.recovered
+			   	  
+			   	  for (var prop in totalRecuperados){
+ 					var index = arrayTotalRecuperados.find(elements => elements.x == new Date(prop).getTime())
+			   	  	index.y += totalRecuperados[prop] 			   	  
+			   	  }
+			   	  
+			   	  
+	    		}
+	    	}
+	    	
+	    	    	
+    	  arrayTotalCasos = arrayTotalCasos.sort(sortfunction)
+	   	  arrayTotalObitos = arrayTotalObitos.sort(sortfunction)
+	   	  arrayTotalRecuperados = arrayTotalRecuperados.sort(sortfunction)
+	   	  	   	  		   	  	   	  
+	   	  chart.series[0].setData(arrayTotalCasos),
+	   	  chart.series[1].setData(arrayTotalObitos),
+	   	  chart.series[2].setData(arrayTotalRecuperados)
+	   	  
+	    })
+	}
+	
+})

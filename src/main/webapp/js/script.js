@@ -110,23 +110,43 @@ $(document).ready(function(){
 				data : JSON.stringify(formData),
 				dataType : "json",
 				success : function(result) {
+					
+					var porcentagemCasos = parseFloat((result.cases * 100) / result.population).toFixed(2);
+					var porcentagemAtivos = parseFloat((result.active * 100) / result.cases).toFixed(2);
+					var porcentagemCriticos = parseFloat((result.critical * 100) / result.active).toFixed(2);
+					var porcentagemObitos = parseFloat((result.deaths * 100) / result.cases).toFixed(2);
+					var porcentagemRecuperados = parseFloat((result.recovered * 100) / result.cases).toFixed(2);
+					var porcentagemTestes = parseFloat((result.tests * 100) / result.population).toFixed(2);
+				
+					
 					$("#totalCasos").html(result.cases.toLocaleString());
+					$("#porcentagemCasos").html(porcentagemCasos + " %");
+					
 					$("#totalAtivos").html(result.active.toLocaleString());
+					$("#porcentagemAtivos").html(porcentagemAtivos + " %");
+					
 					$("#totalObitos").html(result.deaths.toLocaleString());
+					$("#porcentagemObitos").html(porcentagemObitos + " %");
+					
 					$("#totalRecuperados").html(result.recovered.toLocaleString());
+					$("#porcentagemRecuperados").html(porcentagemRecuperados + " %");
+					
 					$("#nomePais, #nomePais-sm, #nomePais-md").html(nomeObj.name);
-					$("#bandeira, #bandeira-sm, #bandeira-md, #divPesquisa").show();
+					$("#bandeira, #bandeira-sm, #bandeira-md").show();
 					$("#bandeira").attr('src',result.countryInfo.flag);
 					$("#bandeira-sm").attr('src',result.countryInfo.flag);
 			        $("#bandeira-md").attr('src',result.countryInfo.flag);
 					$("#populacao").html(result.population.toLocaleString());
 					$("#totalTestes").html(result.tests.toLocaleString());
+					$("#porcentagemTestes").html(porcentagemTestes + " %");
+					
 					$("#totalCriticos").html(result.critical.toLocaleString());
-			
+					$("#porcentagemCriticos").html(porcentagemCriticos + " %");
+
 					$("#hojeCasos").html(result.todayCases.toLocaleString());
 					$("#hojeObitos").html(result.todayDeaths.toLocaleString());
 					$("#hojeRecuperados").html(result.todayRecovered.toLocaleString());
-					$("#pesquisaGrafico").val(30);
+					
 					
 					if(result.oneCasePerPeople <= 20){
                         $("#situacao").html("1 caso a cada "+result.oneCasePerPeople+" pessoas");
