@@ -6,12 +6,12 @@ Aplicação web em Java que tem como objetivo mostrar um dashboard dos casos da 
 Projeto desenvolvido no 5° período do curso de Engenharia de Software, nas matérias de Programação Avançada, Prática Profissional com Dados e Prática Profissional em Engenharia de Software. 
 
 
-![Logo](./mapeamento_covid.png)
+![Logo](https://github.com/Alencar26/Mapeamento-COVID/blob/master/readme/mapeamento_covid.png)
 
     
 ## 
 
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/Alencar26/Mapeamento-COVID/blob/master/LICENSE)
 
   
 ## Tela do Projeto
@@ -21,7 +21,8 @@ Projeto desenvolvido no 5° período do curso de Engenharia de Software, nas mat
   
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![Screenshot1](https://github.com/Alencar26/Mapeamento-COVID/blob/master/readme/tela1.png)
+![Screenshot2](https://github.com/Alencar26/Mapeamento-COVID/blob/master/readme/tela2.png)
 
   
 ## Tecnologias Utilizadas
@@ -84,6 +85,6 @@ Inclusive recomendada pelo Postman.
   
 ## Licença
 
-Este projeto está sob a licença [MIT](https://choosealicense.com/licenses/mit/)
+Este projeto está sob a licença [MIT](https://github.com/Alencar26/Mapeamento-COVID/blob/master/LICENSE)
 
   
