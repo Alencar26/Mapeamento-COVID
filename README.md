@@ -14,7 +14,7 @@ Projeto desenvolvido no 5° período do curso de Engenharia de Software, nas mat
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/Alencar26/Mapeamento-COVID/blob/master/LICENSE)
 
   
-## Telas do Projeto
+## Tela do Projeto
 
 ![Screenshot1](https://github.com/Alencar26/Mapeamento-COVID/blob/master/readme/tela1.png)
 ![Screenshot2](https://github.com/Alencar26/Mapeamento-COVID/blob/master/readme/tela2.png)
