@@ -8,12 +8,12 @@ Projeto desenvolvido no 5° período do curso de Engenharia de Software, nas mat
 
 ![Logo](https://github.com/Alencar26/Mapeamento-COVID/blob/master/readme/mapeamento_covid.png)
 
-    
-## 
-
+![GitHub language count](https://img.shields.io/github/languages/count/Alencar26/Mapeamento-COVID)
+![GitHub top language](https://img.shields.io/github/languages/top/Alencar26/Mapeamento-COVID?color=%23FF7043)
+![GitHub repo size](https://img.shields.io/github/repo-size/Alencar26/Mapeamento-COVID)
+![GitHub contributors](https://img.shields.io/github/contributors/Alencar26/Mapeamento-COVID)
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/Alencar26/Mapeamento-COVID/blob/master/LICENSE)
 
-  
 ## Tela do Projeto
 
 ![Screenshot1](https://github.com/Alencar26/Mapeamento-COVID/blob/master/readme/tela1.png)
