@@ -9,7 +9,7 @@ $(document).ready(function(){
 	$("#bandeira").hide();
 	$("#bandeira-sm").hide();
 	$("#bandeira-md").hide();
-	//$("#divPesquisa").hide();
+	$(".naoMostrar").css("display","none");
 	$("#dataHoje").html(new Date().toLocaleDateString());
 	
 	var paisFinal = "";
@@ -153,7 +153,8 @@ $(document).ready(function(){
 					$("#hojeCasos").html(result.todayCases.toLocaleString());
 					$("#hojeObitos").html(result.todayDeaths.toLocaleString());
 					$("#hojeRecuperados").html(result.todayRecovered.toLocaleString());
-					
+					$(".naoMostrar").css("display","block");
+					$(".naoMostrar").css("height","87px");
 					
 					if(result.oneCasePerPeople <= 20){
                         $("#situacao").html("1 caso a cada "+result.oneCasePerPeople+" pessoas");
