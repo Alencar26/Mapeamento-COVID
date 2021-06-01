@@ -72,7 +72,7 @@ Inclusive recomendada pelo Postman.
   
 ## Autores
 
-- [Júlia Louback](https://github.com/JuliaLouback)
+- [Julia Louback](https://github.com/JuliaLouback)
 - [André Alencar](https://github.com/Alencar26)
 - [Leonardo Kamers](https://github.com/kamers07leo)
 - [Júlio Ferens](https://github.com/julioferens)
