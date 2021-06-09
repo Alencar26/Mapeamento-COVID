@@ -10,7 +10,9 @@ $(document).ready(function(){
 	$("#bandeira-sm").hide();
 	$("#bandeira-md").hide();
 	$(".naoMostrar").css("display","none");
-	$("#dataHoje").html(new Date().toLocaleDateString());
+	$(".footer").hide();
+	
+	$("#dataHoje").html(new Date(new Date().setDate(new Date().getDate()-1)).toLocaleDateString());
 	
 	var paisFinal = "";
 	
@@ -92,6 +94,105 @@ $(document).ready(function(){
 		}
 	});
 	
+	function procurarDados(array){
+	
+		let tamanho = array.length
+		let continua = true
+		let i = tamanho-1
+		
+		while(continua){
+			
+			 if(array[i].new_cases != "0" && array[i].new_cases != 0 && array[i].total_vaccinations != "null"){
+			 	$("#hojeCasos").html(Number(array[i].new_cases).toLocaleString());
+			 	continua = false;
+			 }
+			 
+			 i--;
+		}
+		
+		let continua_obitos = true
+		let j = tamanho-1
+					
+		while(continua_obitos){
+			
+			 if(array[j].new_deaths != "0" && array[j].new_deaths != 0 && array[j].total_vaccinations != "null"){
+			 	$("#hojeObitos").html(Number(array[j].new_deaths).toLocaleString());
+			 	continua_obitos = false;
+			 }
+			 
+			 j--;
+		}
+					
+					
+		let continua_vacinas = true
+		let k = tamanho-1
+		
+		try{
+			while(continua_vacinas){
+				
+				 if(array[k].new_vaccinations != "0" && array[k].new_vaccinations != 0 && array[k].new_vaccinations != "null" ){
+				 	$("#hojeVacinas").html(Number(array[k].new_vaccinations).toLocaleString());
+				 	continua_vacinas = false;
+				 } 
+				 k--;
+			}
+		} catch(e){
+			k = tamanho-1
+			
+			while(continua_vacinas){
+				
+				 if(array[k].new_vaccinations_smoothed != "0" && array[k].new_vaccinations_smoothed != 0 && array[k].new_vaccinations_smoothed != "null" ){
+				 	$("#hojeVacinas").html(Number(array[k].new_vaccinations_smoothed).toLocaleString());
+				 	continua_vacinas = false;
+				 } 
+				 k--;
+			}
+		}
+		
+		let continua_doses = true
+		let m = tamanho-1
+		
+		while(continua_doses){
+			
+			 if(array[m].people_vaccinated != "0" && array[m].people_vaccinated != 0 && array[m].people_vaccinated != "null" ){
+			 	$("#totalDoses").html(Number(array[m].total_vaccinations).toLocaleString());
+			 	continua_doses = false;
+			 } 
+			 m--;
+		}
+		
+		
+		let continua_total = true
+		let n = tamanho-1
+		
+		while(continua_total){
+			
+			 if(array[n].total_vaccinations != "0" && array[n].total_vaccinations != 0 && array[n].total_vaccinations != "null" ){
+			 	$("#totalVacinados").html(Number(array[n].people_vaccinated).toLocaleString());
+			 	continua_total = false;
+			 } 
+			 n--;
+		}
+		
+		let continua_imunizados = true
+		let o = tamanho-1
+		
+		while(continua_imunizados){
+			
+			 if(array[o].people_fully_vaccinated != "0" && array[o].people_fully_vaccinated != 0 && array[o].people_fully_vaccinated != "null" ){
+			 	$("#totalImunizados").html(Number(array[o].people_fully_vaccinated).toLocaleString());
+			 	continua_imunizados = false;
+			 } 
+			 o--;
+			  
+			if(o == 0){
+				$("#totalImunizados").html("Não informado");
+				 continua_imunizados = false;
+			}
+		}
+		
+	}
+	
 	function ajaxPost(event){
 	
 		var formData = {}
@@ -117,7 +218,7 @@ $(document).ready(function(){
 				data : JSON.stringify(formData),
 				dataType : "json",
 				success : function(result) {
-					
+					console.log(result)
 					var porcentagemCasos = parseFloat((result.cases * 100) / result.population).toFixed(2);
 					var porcentagemAtivos = parseFloat((result.active * 100) / result.cases).toFixed(2);
 					var porcentagemCriticos = parseFloat((result.critical * 100) / result.active).toFixed(2);
@@ -150,9 +251,11 @@ $(document).ready(function(){
 					$("#totalCriticos").html(result.critical.toLocaleString());
 					$("#porcentagemCriticos").html(porcentagemCriticos + " %");
 
-					$("#hojeCasos").html(result.todayCases.toLocaleString());
-					$("#hojeObitos").html(result.todayDeaths.toLocaleString());
-					$("#hojeRecuperados").html(result.todayRecovered.toLocaleString());
+					$(".footer").show();
+					let array = result.covidData
+				
+					procurarDados(array)
+					
 					$(".naoMostrar").css("display","block");
 					$(".naoMostrar").css("height","87px");
 					

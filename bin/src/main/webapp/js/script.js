@@ -9,7 +9,7 @@ $(document).ready(function(){
 	$("#bandeira").hide();
 	$("#bandeira-sm").hide();
 	$("#bandeira-md").hide();
-	//$("#divPesquisa").hide();
+	$(".naoMostrar").css("display","none");
 	$("#dataHoje").html(new Date().toLocaleDateString());
 	
 	var paisFinal = "";
@@ -76,12 +76,19 @@ $(document).ready(function(){
 	
 	$("#pesquisaGrafico").blur(function(event) {
 	
+		var ultimosDias = event.target.value;
+
+		var seletor = $("#selectPesquisa option:selected").val();
+		
+		if(seletor == "mes")
+			ultimosDias = ultimosDias * 30;
+
 		if(paisFinal == ""){
-			getDataContinent(event, event.target.value)
-			chart.setTitle({ text: 'Gráfico - Últimos '+ event.target.value +' dias'})
+			getDataContinent(event, ultimosDias)
+			chart.setTitle(seletor == "dia" ? { text: 'Gráfico - Últimos '+ ultimosDias +' dias'} : { text: 'Gráfico - Últimos '+ event.target.value +' meses' })
 			
 		}else{
-			getData(paisFinal, event.target.value);
+			getData(paisFinal, ultimosDias);
 		}
 	});
 	
@@ -110,23 +117,44 @@ $(document).ready(function(){
 				data : JSON.stringify(formData),
 				dataType : "json",
 				success : function(result) {
+					
+					var porcentagemCasos = parseFloat((result.cases * 100) / result.population).toFixed(2);
+					var porcentagemAtivos = parseFloat((result.active * 100) / result.cases).toFixed(2);
+					var porcentagemCriticos = parseFloat((result.critical * 100) / result.active).toFixed(2);
+					var porcentagemObitos = parseFloat((result.deaths * 100) / result.cases).toFixed(2);
+					var porcentagemRecuperados = parseFloat((result.recovered * 100) / result.cases).toFixed(2);
+					var porcentagemTestes = parseFloat((result.tests * 100) / result.population).toFixed(2);
+				
+					
 					$("#totalCasos").html(result.cases.toLocaleString());
+					$("#porcentagemCasos").html(porcentagemCasos + " %");
+					
 					$("#totalAtivos").html(result.active.toLocaleString());
+					$("#porcentagemAtivos").html(porcentagemAtivos + " %");
+					
 					$("#totalObitos").html(result.deaths.toLocaleString());
+					$("#porcentagemObitos").html(porcentagemObitos + " %");
+					
 					$("#totalRecuperados").html(result.recovered.toLocaleString());
+					$("#porcentagemRecuperados").html(porcentagemRecuperados + " %");
+					
 					$("#nomePais, #nomePais-sm, #nomePais-md").html(nomeObj.name);
-					$("#bandeira, #bandeira-sm, #bandeira-md, #divPesquisa").show();
+					$("#bandeira, #bandeira-sm, #bandeira-md").show();
 					$("#bandeira").attr('src',result.countryInfo.flag);
 					$("#bandeira-sm").attr('src',result.countryInfo.flag);
 			        $("#bandeira-md").attr('src',result.countryInfo.flag);
 					$("#populacao").html(result.population.toLocaleString());
 					$("#totalTestes").html(result.tests.toLocaleString());
+					$("#porcentagemTestes").html(porcentagemTestes + " %");
+					
 					$("#totalCriticos").html(result.critical.toLocaleString());
-			
+					$("#porcentagemCriticos").html(porcentagemCriticos + " %");
+
 					$("#hojeCasos").html(result.todayCases.toLocaleString());
 					$("#hojeObitos").html(result.todayDeaths.toLocaleString());
 					$("#hojeRecuperados").html(result.todayRecovered.toLocaleString());
-					$("#pesquisaGrafico").val(30);
+					$(".naoMostrar").css("display","block");
+					$(".naoMostrar").css("height","87px");
 					
 					if(result.oneCasePerPeople <= 20){
                         $("#situacao").html("1 caso a cada "+result.oneCasePerPeople+" pessoas");
@@ -158,6 +186,7 @@ $(document).ready(function(){
 	var options = {
 	  chart: {
 	    type: 'spline',
+		zoomType: 'x',
 	    events: {
 	    	load: getDataContinent
 	    }
@@ -275,6 +304,13 @@ $(document).ready(function(){
 	// Data
 	function getData(stringPais, lastDays) {
 	
+		var ultimosDias = lastDays;
+
+		var seletor = $("#selectPesquisa option:selected").val();
+		
+		if(seletor == "mes")
+			ultimosDias = ultimosDias / 30;
+
 		console.log(lastDays)
 		
 		var pais = ""
@@ -290,12 +326,13 @@ $(document).ready(function(){
 			pais = "Brazil"
 		}
 		
-		if(lastDays == 0){
+		if(lastDays == 0 || ultimosDias == 0){
 			lastDays = 30
+			ultimosDias = 1
 		}
 			
-			
-		chart.setTitle({ text: 'Gráfico - Últimos '+ lastDays +' dias'})
+		chart.setTitle(seletor == "dia" ? { text: 'Gráfico - Últimos '+ lastDays +' dias'} : { text: 'Gráfico - Últimos '+ ultimosDias +' meses' })
+		
 		
 	    fetch('https://disease.sh/v3/covid-19/historical/'+pais+'?lastdays='+lastDays).then(function(response) {
 	      return response.json()

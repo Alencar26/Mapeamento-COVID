@@ -16,6 +16,7 @@ public class MapeamentoCovidApplication {
     
 	public static void main(String[] args) throws InterruptedException {
 		SpringApplication.run(MapeamentoCovidApplication.class, args);
+		
 	}
 
 }

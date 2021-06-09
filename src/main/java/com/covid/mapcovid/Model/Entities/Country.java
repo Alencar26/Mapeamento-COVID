@@ -1,5 +1,6 @@
 package com.covid.mapcovid.Model.Entities;
 
+import java.util.List;
 
 public class Country {
 
@@ -26,6 +27,7 @@ public class Country {
     private float activePerOneMillion;
     private float recoveredPerOneMillion;
     private float criticalPerOneMillion;
+	private List<CovidData> covidData;
 
     public Country() {
     }
@@ -239,4 +241,11 @@ public class Country {
     public void setCriticalPerOneMillion(float criticalPerOneMillion) {
         this.criticalPerOneMillion = criticalPerOneMillion;
     }
+    
+	public List<CovidData> getCovidData() {
+		return covidData;
+	}
+	public void setCovidData(List<CovidData> covidData) {
+		this.covidData = covidData;
+	}
 }

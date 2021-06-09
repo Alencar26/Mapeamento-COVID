@@ -1,6 +1,7 @@
 package com.covid.mapcovid.Model.Entities;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class CovidData {
 	
@@ -62,6 +63,7 @@ public class CovidData {
 	private String hospital_beds_per_thousand;
 	private String life_expectancy;
 	private String human_development_index;
+	
 	@Override
 	public String toString() {
 		return "CovidData [continent=" + continent + ", location=" + location + ", date=" + date + ", total_cases="
@@ -523,9 +525,9 @@ public class CovidData {
 	}
 
 	public CovidData(String addString) {
-		 
-		String[] arrayOfStrings = addString.split(",");
 		
+		String[] arrayOfStrings = addString.split("/");
+        
 		this.continent 						= (arrayOfStrings.length >= 2) ? arrayOfStrings[1] : "null";
 		this.location 						= (arrayOfStrings.length >= 3) ? arrayOfStrings[2] : "null";
 		this.date 							= (arrayOfStrings.length >= 4) ? arrayOfStrings[3] : "null";
@@ -550,8 +552,8 @@ public class CovidData {
 		this.weekly_icu_admissions_per_million 	= (arrayOfStrings.length >= 23) ? arrayOfStrings[22] : "null";
 		this.weekly_hosp_admissions	 			= (arrayOfStrings.length >= 24) ? arrayOfStrings[23] : "null";
 		this.weekly_hosp_admissions_per_million = (arrayOfStrings.length >= 25) ? arrayOfStrings[24] : "null";
-		this.total_tests 						= (arrayOfStrings.length >= 26) ? arrayOfStrings[25] : "null";
-		this.new_tests 							= (arrayOfStrings.length >= 27) ? arrayOfStrings[26] : "null";
+		this.new_tests 							= (arrayOfStrings.length >= 26) ? arrayOfStrings[26] : "null";
+		this.total_tests 						= (arrayOfStrings.length >= 27) ? arrayOfStrings[25] : "null";
 		this.total_tests_per_thousand 			= (arrayOfStrings.length >= 28) ? arrayOfStrings[27] : "null";
 		this.new_tests_per_thousand 			= (arrayOfStrings.length >= 29) ? arrayOfStrings[28] : "null";
 		this.new_tests_smoothed 				= (arrayOfStrings.length >= 30) ? arrayOfStrings[29] : "null";
@@ -585,5 +587,7 @@ public class CovidData {
 		this.life_expectancy                       = (arrayOfStrings.length >= 58) ? arrayOfStrings[57] : "null";
 		this.human_development_index               = (arrayOfStrings.length >= 59) ? arrayOfStrings[58] : "null";
 	}
-	
+	public CovidData() {
+		// TODO Auto-generated constructor stub
+	}	
 }

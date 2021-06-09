@@ -6,9 +6,17 @@ import com.covid.mapcovid.Model.Entities.CovidData;
 import com.covid.mapcovid.Model.Entities.Request;
 import com.covid.mapcovid.useCase.CovidDataUseCase;
 
+import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.ui.Model;
@@ -42,11 +50,24 @@ public class CountriesController {
 	
 
 	@RequestMapping(value = "/countryJSON", method = RequestMethod.POST)
-    public Country countryChangeJSON(@RequestBody Request request) {
+    public Country countryChangeJSON(@RequestBody Request request, HttpServletRequest httpRequest) {
     		
 		System.out.println(request.getName());
 						
+		HttpSession httpSession = httpRequest.getSession(false);
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    Calendar calendar = Calendar.getInstance();
+	    calendar.add(Calendar.DATE, -1);
+	    Date yesterday = calendar.getTime();
+	    String data = dateFormat.format(yesterday).toString();
+	
+		List<CovidData> lista = (List<CovidData>) httpSession.getAttribute("ListaCovid");
+		
+		List<CovidData> covidData =  lista.stream().filter(covid -> covid.getLocation().equals(request.getName())).collect(Collectors.toList());
+				
    	 	Country countrySelect = CountryOperation.GetCountry(request.getName());
+   	 	countrySelect.setCovidData(covidData);
 
 		return countrySelect;
 	}

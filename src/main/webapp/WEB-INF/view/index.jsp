@@ -22,7 +22,7 @@
 	</head>
 	<body class="bg-cinza">
 		<nav class="navbar navbar-expand-lg navbar-light bg-cinza">
-		 <input type="image"  data-bs-toggle="modal" data-bs-target="#exampleModal"  src="../../img/Covid_Roxo.png" width="40" height="40"/>	  
+		 <input type="image"  data-bs-toggle="modal" data-bs-target="#exampleModal"  src="../../img/Covid_Roxo.png" width="40" height="40" class="ms-3"/>	  
 		  <div class="container-fluid">
 		    <a class="navbar-brand text-light fw-bold fs-3" href="/">Mapeamento COVID-19</a>
 		      <div class="d-flex mt-2">
@@ -108,8 +108,9 @@
 						      <div class="card-body">
 						        <h6 class="card-title ms-2 ms-md-0">Total de Infectados</h6>
 						        <h5 class="card-text text-light ms-2 ms-md-0" id="totalCasos">${totalCasos}</h5>
-						        <span href="porcentagemCasos" data-toggle="popover" title="Porcentagem de casos totais" data-bs-content="Calculo feito com base na população total" data-bs-trigger="hover focus" >
-						        <span id="porcentagemCasos" class="card-text-menor text-light ms-2 ms-md-0 naoMostrar" >porcentagemCasos</span>
+						        <span data-toggle="popover" title="Porcentagem de casos totais" data-bs-content="Calculo feito com base na população total" data-bs-trigger="hover focus" >
+						        	<span id="porcentagemCasos" class="card-text-menor text-light ms-2 ms-md-0 naoMostrar" >porcentagemCasos</span>
+						     	</span>
 						      </div>
 						    </div>
 						  </div>
@@ -126,7 +127,7 @@
 						        <div class="card-body">
 						        	<h6 class="card-title ms-2 ms-md-0">Total Casos Ativos</h6>
 						        	<h5 class="card-text text-light ms-2 ms-md-0" id="totalAtivos">${totalAtivos}</h5>
-						        	<span href="porcentagemAtivos" data-toggle="popover" title="Porcentagem de casos ativos" data-bs-content="Calculo feito com base no total de infectados" data-bs-trigger="hover focus">
+						        	<span href="porcentagemAtivos" data-toggle="popover" title="Porcentagem de casos ativos"  data-bs-container="body" data-bs-content="Cálculo feito com base no total de infectados" data-bs-trigger="hover focus">
 						        	<span id="porcentagemAtivos" class="card-text-menor text-light ms-2 ms-md-0 naoMostrar" >porcentagemAtivos</span>
 						      	</div>
 						    </div>
@@ -143,7 +144,7 @@
 						        <div class="card-body">
 						        	<h6 class="card-title ms-2 ms-md-0">Total Casos Críticos</h6>
 						        	<h5 class="card-text text-light ms-2 ms-md-0" id="totalCriticos">${totalCriticos}</h5>
-						        	<span href="porcentagemCriticos" data-toggle="popover" title="Porcentagem de casos criticos" data-bs-content="Calculo feito com base no total de casos críticos" data-bs-trigger="hover focus">
+						        	<span href="porcentagemCriticos" data-toggle="popover" title="Porcentagem de casos críticos" data-bs-content="Cálculo feito com base no total de casos críticos" data-bs-trigger="hover focus">
 						        	<span id="porcentagemCriticos" class="card-text-menor text-light ms-2 ms-md-0 naoMostrar" >porcentagemCriticos</span>
 						      	</div>
 						    </div>
@@ -160,7 +161,7 @@
 						        <div class="card-body">
 							        <h6 class="card-title ms-2 ms-md-0">Total de Óbitos</h6>
 							        <h5 class="card-text text-light ms-2 ms-md-0" id="totalObitos">${totalObitos}</h5>
-							        <span href="porcentagemObitos" data-toggle="popover" title="Porcentagem de óbitos" data-bs-content="Calculo feito com base no total de infectados" data-bs-trigger="hover focus">
+							        <span href="porcentagemObitos" data-toggle="popover" title="Porcentagem de óbitos" data-bs-content="Cálculo feito com base no total de infectados" data-bs-trigger="hover focus">
 							        <span id="porcentagemObitos" class="card-text-menor text-light ms-2 ms-md-0 naoMostrar" >porcentagemObitos</span>
 						      	</div>
 						    </div>
@@ -177,7 +178,7 @@
 						        <div class="card-body">
 							        <h6 class="card-title ms-2 ms-md-0">Total de Recuperados</h6>
 							        <h5 class="card-text text-light ms-2 ms-md-0" id="totalRecuperados">${totalRecuperados}</h5>
-							        <span href="porcentagemRecuperados" data-toggle="popover" title="Porcentagem de recuperados" data-bs-content="Calculo feito com base no total de infectados" data-bs-trigger="hover focus">
+							        <span href="porcentagemRecuperados" data-toggle="popover" title="Porcentagem de recuperados" data-bs-content="Cálculo feito com base no total de infectados" data-bs-trigger="hover focus">
 							        <span id="porcentagemRecuperados" class="card-text-menor text-light ms-2 ms-md-0 naoMostrar" >porcentagemRecuperados</span>
 						      	</div>
 						    </div>
@@ -194,7 +195,7 @@
 						        <div class="card-body">
 							        <h6 class="card-title ms-2 ms-md-0">Total de Testes</h6>
 							        <h5 class="card-text text-light ms-2 ms-md-0" id="totalTestes">${totalTestes}</h5>
-							        <span href="porcentagemTestes" data-toggle="popover" title="Porcentagem de testes" data-bs-content="Calculo aproximado feito com base na população total" data-bs-trigger="hover focus">
+							        <span href="porcentagemTestes" data-toggle="popover" title="Porcentagem de testes" data-bs-content="Cálculo aproximado feito com base na população total" data-bs-trigger="hover focus">
 							        <span id="porcentagemTestes" class="card-text-menor text-light ms-2 ms-md-0 naoMostrar" >porcentagemTestes</span>
 						      	</div>
 						    </div>
@@ -277,7 +278,7 @@
 	    			</div>
 	    			<div class="col-5" id="divPesquisa">		   	
 					  	<div class="input-group input-group-sm mt-2 ms-3">
-						  <span class="input-group-text">Grafico ultimos </span>
+						  <span class="input-group-text">Gráfico últimos </span>
 						  <input type="number" class="form-control" placeholder="30" min=0 id="pesquisaGrafico">
 						  <select class="input-group-text" id="selectPesquisa">
 							<option value="dia">dias</option>
@@ -336,12 +337,57 @@
 						  	<div class="card bg-cinza border-0">
 						      <div class="row g-0">
 							    <div class="col-2 col-sm-3">
-							      <img src="../img/recuperados.png" width="47px" class="mx-3 my-3">
+							      <img src="../img/vacinas.png" width="47px" class="mx-3 my-3">
 							    </div>
 							    <div class="col-10 col-sm-9">
 							        <div class="card-body">
-								        <h6 class="card-title ms-2 ms-md-0">Recuperados</h6>
-								        <h5 class="card-text text-light ms-2 ms-md-0" id="hojeRecuperados">${hojeRecuperados}</h5>
+								        <h6 class="card-title ms-2 ms-md-0">Vacinas</h6>
+								        <h5 class="card-text text-light ms-2 ms-md-0" id="hojeVacinas">${hojeVacinas}</h5>
+							      	</div>
+							    </div>
+							  </div> 
+						    </div>
+						  </div>
+						  <div class="col">
+						  	<div class="card bg-cinza border-0">
+						      <div class="row g-0">
+							    <div class="col-2 col-sm-3">
+							      <img src="../img/doses.png" width="47px" class="mx-3 my-3">
+							    </div>
+							    <div class="col-10 col-sm-9">
+							        <div class="card-body">
+								        <h6 class="card-title ms-2 ms-md-0">Total de Doses</h6>
+								        <h5 class="card-text text-light ms-2 ms-md-0" id="totalDoses">${totalDoses}</h5>
+							      	</div>
+							    </div>
+							  </div> 
+						    </div>
+						  </div>
+						   <div class="col">
+						  	<div class="card bg-cinza border-0">
+						      <div class="row g-0">
+							    <div class="col-2 col-sm-3">
+							      <img src="../img/total.png" width="47px" class="mx-3 my-3">
+							    </div>
+							    <div class="col-10 col-sm-9">
+							        <div class="card-body">
+								        <h6 class="card-title ms-2 ms-md-0">Total de Vacinados</h6>
+								        <h5 class="card-text text-light ms-2 ms-md-0" id="totalVacinados">${hojeRecuperados}</h5>
+							      	</div>
+							    </div>
+							  </div> 
+						    </div>
+						  </div>
+						  <div class="col">
+						  	<div class="card bg-cinza border-0">
+						      <div class="row g-0">
+							    <div class="col-2 col-sm-3">
+							      <img src="../img/imunizada.png" width="47px" class="mx-3 my-3">
+							    </div>
+							    <div class="col-10 col-sm-9">
+							        <div class="card-body">
+								        <h6 class="card-title ms-2 ms-md-0">Imunizados</h6>
+								        <h5 class="card-text text-light ms-2 ms-md-0" id="totalImunizados">${hojeRecuperados}</h5>
 							      	</div>
 							    </div>
 							  </div> 

@@ -22,10 +22,37 @@
 	</head>
 	<body class="bg-cinza">
 		<nav class="navbar navbar-expand-lg navbar-light bg-cinza">
+		 <input type="image"  data-bs-toggle="modal" data-bs-target="#exampleModal"  src="../../img/Covid_Roxo.png" width="40" height="40"/>	  
 		  <div class="container-fluid">
 		    <a class="navbar-brand text-light fw-bold fs-3" href="/">Mapeamento COVID-19</a>
 		      <div class="d-flex mt-2">
 		     
+
+		     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">O que é o Coronavirus?</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <div class="modal-body">
+				        
+				       <li>A Covid-19 é uma infecção respiratória aguda causada pelo coronavírus SARS-CoV-2, potencialmente grave, de elevada transmissibilidade e de distribuição global.</li>
+
+						<br>
+
+	      			   <li>O SARS-CoV-2 é um betacoronavírus descoberto em amostras de lavado broncoalveolar obtidas de pacientes com pneumonia de causa desconhecida na cidade de Wuhan, província de Hubei, China, em dezembro de 2019. Pertence ao subgênero Sarbecovírus da família Coronaviridae e é o sétimo coronavírus conhecido a infectar seres humanos. </li>
+
+						<br>
+
+	      			   <li>Os coronavírus são uma grande família de vírus comuns em muitas espécies diferentes de animais, incluindo o homem, camelos, gado, gatos e morcegos. Raramente os coronavírus de animais podem infectar pessoas e depois se espalhar entre seres humanos como já ocorreu com o MERS-CoV e o SARS-CoV-2. Até o momento, não foi definido o reservatório silvestre do SARS-CoV-2.</li>
+				      
+				      </div>
+				    </div>
+				  </div>
+				</div>
+		     
+
 				<span href="#" data-toggle="popover" title="Parcela da População" data-bs-content="Um caso confirmado entre 51 pessoas ou mais" data-bs-trigger="hover focus">
 					<img src="../../img/shield_baixo.png" class="me-2" width="50px">	
 				</span>
@@ -81,6 +108,8 @@
 						      <div class="card-body">
 						        <h6 class="card-title ms-2 ms-md-0">Total de Infectados</h6>
 						        <h5 class="card-text text-light ms-2 ms-md-0" id="totalCasos">${totalCasos}</h5>
+						        <span href="porcentagemCasos" data-toggle="popover" title="Porcentagem de casos totais" data-bs-content="Calculo feito com base na população total" data-bs-trigger="hover focus" >
+						        <span id="porcentagemCasos" class="card-text-menor text-light ms-2 ms-md-0 naoMostrar" >porcentagemCasos</span>
 						      </div>
 						    </div>
 						  </div>
@@ -97,6 +126,8 @@
 						        <div class="card-body">
 						        	<h6 class="card-title ms-2 ms-md-0">Total Casos Ativos</h6>
 						        	<h5 class="card-text text-light ms-2 ms-md-0" id="totalAtivos">${totalAtivos}</h5>
+						        	<span href="porcentagemAtivos" data-toggle="popover" title="Porcentagem de casos ativos" data-bs-content="Calculo feito com base no total de infectados" data-bs-trigger="hover focus">
+						        	<span id="porcentagemAtivos" class="card-text-menor text-light ms-2 ms-md-0 naoMostrar" >porcentagemAtivos</span>
 						      	</div>
 						    </div>
 						  </div> 
@@ -112,6 +143,8 @@
 						        <div class="card-body">
 						        	<h6 class="card-title ms-2 ms-md-0">Total Casos Críticos</h6>
 						        	<h5 class="card-text text-light ms-2 ms-md-0" id="totalCriticos">${totalCriticos}</h5>
+						        	<span href="porcentagemCriticos" data-toggle="popover" title="Porcentagem de casos criticos" data-bs-content="Calculo feito com base no total de casos críticos" data-bs-trigger="hover focus">
+						        	<span id="porcentagemCriticos" class="card-text-menor text-light ms-2 ms-md-0 naoMostrar" >porcentagemCriticos</span>
 						      	</div>
 						    </div>
 						  </div> 
@@ -127,6 +160,8 @@
 						        <div class="card-body">
 							        <h6 class="card-title ms-2 ms-md-0">Total de Óbitos</h6>
 							        <h5 class="card-text text-light ms-2 ms-md-0" id="totalObitos">${totalObitos}</h5>
+							        <span href="porcentagemObitos" data-toggle="popover" title="Porcentagem de óbitos" data-bs-content="Calculo feito com base no total de infectados" data-bs-trigger="hover focus">
+							        <span id="porcentagemObitos" class="card-text-menor text-light ms-2 ms-md-0 naoMostrar" >porcentagemObitos</span>
 						      	</div>
 						    </div>
 						  </div> 
@@ -142,6 +177,8 @@
 						        <div class="card-body">
 							        <h6 class="card-title ms-2 ms-md-0">Total de Recuperados</h6>
 							        <h5 class="card-text text-light ms-2 ms-md-0" id="totalRecuperados">${totalRecuperados}</h5>
+							        <span href="porcentagemRecuperados" data-toggle="popover" title="Porcentagem de recuperados" data-bs-content="Calculo feito com base no total de infectados" data-bs-trigger="hover focus">
+							        <span id="porcentagemRecuperados" class="card-text-menor text-light ms-2 ms-md-0 naoMostrar" >porcentagemRecuperados</span>
 						      	</div>
 						    </div>
 						  </div> 
@@ -157,6 +194,8 @@
 						        <div class="card-body">
 							        <h6 class="card-title ms-2 ms-md-0">Total de Testes</h6>
 							        <h5 class="card-text text-light ms-2 ms-md-0" id="totalTestes">${totalTestes}</h5>
+							        <span href="porcentagemTestes" data-toggle="popover" title="Porcentagem de testes" data-bs-content="Calculo aproximado feito com base na população total" data-bs-trigger="hover focus">
+							        <span id="porcentagemTestes" class="card-text-menor text-light ms-2 ms-md-0 naoMostrar" >porcentagemTestes</span>
 						      	</div>
 						    </div>
 						  </div> 
@@ -238,9 +277,12 @@
 	    			</div>
 	    			<div class="col-5" id="divPesquisa">		   	
 					  	<div class="input-group input-group-sm mt-2 ms-3">
-						  <span class="input-group-text">Gráfico - Últimos </span>
+						  <span class="input-group-text">Grafico ultimos </span>
 						  <input type="number" class="form-control" placeholder="30" min=0 id="pesquisaGrafico">
-						  <span class="input-group-text">dias</span>
+						  <select class="input-group-text" id="selectPesquisa">
+							<option value="dia">dias</option>
+							<option value="mes">mes</option>
+						  </select>
 						</div>
 					 </div>
 					<div class="col-12">

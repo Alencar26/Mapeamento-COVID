@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Row.MissingCellPolicy;
@@ -47,21 +48,23 @@ public class CsvReader {
                  for (int j = 0; j < row.getLastCellNum(); j++) {
                 	 
                     Cell cell = row.getCell(j);
-                    
-                    if (cell == null) {
-                    	addString += "null,";
+                                        
+                    if (cell == null || cell.getCellType() == Cell.CELL_TYPE_BLANK) {
+                    	addString += "null/";
                     } else {
                        String cellStr = fmt.formatCellValue(cell);
                        
-                       addString += cellStr + ",";
+                       addString += cellStr + "/";
+                       
                     }
                  }
-                                  
+                     
+                 
                  CovidData covidData = new CovidData(addString);
-                                  
+                                               
                  lista.add(covidData);
                  
-                 addString = " ";
+                 addString = "";
               }
            }  
         }
