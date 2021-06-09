@@ -104,7 +104,7 @@
 		      </div>
 		  </div>
 		</nav>
-	    <div class="container-fluid ps-md-3 pt-4 pt-md-0">
+	    <div class="container-fluid ps-md-3 pt-4 pt-lg-0">
 	    	<div class="row p-lg-2">
 	    		<div class="col-12 d-block d-md-none">
     				  <div style='vertical-align:middle; display:inline;' class="text-light">
@@ -112,7 +112,7 @@
 					  </div>
 					  <img style='vertical-align:middle;' src="${bandeira}" id="bandeira-sm" width="60px" height="40px" class="rounded ms-3 mb-1 mt-1">
     			  </div>
-	    		<div class="col-12 col-sm-7 col-md-6 col-lg-4 col-xl-3 order-3 order-sm-2 order-md-1">
+	    		<div class="col-12 col-sm-7 col-md-6 col-lg-6 col-xl-3 order-3 order-sm-2 order-md-1">
 	    			<div class="row row-cols-1 g-1 g-md-0">
 					  <div class="col">
 					    <div class="card bg-cinza border-0">
@@ -221,7 +221,7 @@
 					</div>
 	    		</div>
 
-	    		<div class="col-12 col-md-6 col-lg-4 order-1 order-md-2">
+	    		<div class="col-12 col-md-6 col-lg-6 col-xl-4 order-1 order-md-2">
 	    	
 	    			<div class="mapdiv">
 	    			
@@ -263,7 +263,7 @@
         				</svg> 
     				</div>
 				</div>
-	    		<div class="col-12 col-sm-5 col-md-12 col-lg-5 order-2 order-md-3 pe-5">
+	    		<div class="col-12 col-sm-5 col-md-12 col-lg-12 col-xl-5 order-2 order-md-3 pe-5">
 	    			<div class="row mb-4 mb-md-0">
 	    				<div class="col-12 d-none d-lg-block">
 							<div style='vertical-align:middle; display:inline;' class="text-light">
@@ -272,8 +272,8 @@
 							<img style='vertical-align:middle;' src="${bandeira}" id="bandeira" width="60px" height="40px" class="rounded ms-3 mb-1 mt-1">
 	    				</div>
 	    				<div class="col-12">
-	    				  <div class="row row-cols-1 row-cols-lg-2 g-0 mt-3 mt-sm-0 mb-2">	    					
-							  <div class="col-8">
+	    				  <div class="row row-cols-1 row-cols-md-2 g-0 mt-3 mt-sm-0 mb-2">	    					
+							  <div class="col-12">
 							    <div class="card bg-cinza border-0">
 							      <div class="card-body">
 							        <h6 class="card-title fs-5">População</h6>
@@ -281,8 +281,8 @@
 							      </div>
 							  	</div>    
 							  </div>
-							  <div class="col-8">
-							    <div class="card bg-cinza border-0">
+							  <div class="col-12">
+							    <div class="card bg-cinza border-0 ms-3 ms-md-0">
 							      <div class="card-body" style="padding:1rem 0rem;">
 							        <h6 class="card-title fs-5">Parcela da população</h6>
 							        <h6 class="card-text fw-bold text-left mx-4" id="situacao" style="color:${cor}; "> ${situacao} casos por  milhão</h6>
@@ -293,7 +293,7 @@
 	    				</div>
 	    			</div>
 	    			<div class="row mb-4 mb-md-0">
-		    			<div class="col-5" id="divPesquisa">		   	
+		    			<div class="col-12 col-md-5" id="divPesquisa">		   	
 						  	<div class="input-group input-group-sm ms-3">
 							  <span class="input-group-text">Gráfico últimos </span>
 							  <input type="number" class="form-control" placeholder="30" min=0 id="pesquisaGrafico">
@@ -303,13 +303,13 @@
 							  </select>
 							</div>
 						 </div>
-						 <div class="col-6" id="divGraficoVacina">		   	
-						  	<div class="input-group input-group-sm ms-3">
-							  <button class="btn btn-outline-info ms-4" data-bs-toggle="modal" data-bs-target="#modalGrafico">Gráfico de Vacinação</button>
+						 <div class="col-12 col-md-6" id="divGraficoVacina">		   	
+						  	<div class="input-group input-group-sm ms-md-3 mt-3 mt-md-0">
+							  <button class="btn btn-outline-info ms-3 ms-md-4" data-bs-toggle="modal" data-bs-target="#modalGrafico">Gráfico de Vacinação</button>
 							</div>
 						 </div>
 					 
-						<div class="col-12 mt-2">
+						<div class="col-12 mt-5 mt-lg-2 mb-lg-5">
 							<figure class="highcharts-figure" >
 						  		<div id="container" style="height: 370px;"></div>
 							</figure>
@@ -318,7 +318,7 @@
 	    		</div>
 	    	</div>
 	    </div>
-	    <footer class="footer fixed-bottom p-md-3 p-xl-1 mt-4 mt-lg-0 bg-cinza">
+	    <footer class="footer fixed-bottom p-md-3 p-xl-1 mt-4 mt-lg-5 mt-xl-0 bg-cinza">
 	    	<div class="container-fluid">
 	    		<div class="row">
 	    			<div class="col-12">
