@@ -51,6 +51,22 @@
 				    </div>
 				  </div>
 				</div>
+				
+				<div class="modal fade" id="modalGrafico" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="modalGrafico">Gráfico de Vacinação</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <div class="modal-body">
+				     	<figure class="highcharts-figure" id="graficoVacinacao">
+						  	<div id="container-2"></div>
+						</figure>
+				      </div>
+				    </div>
+				  </div>
+				</div>
 		     
 
 				<span href="#" data-toggle="popover" title="Parcela da População" data-bs-content="Um caso confirmado entre 51 pessoas ou mais" data-bs-trigger="hover focus">
@@ -255,7 +271,7 @@
 							</div>
 							<img style='vertical-align:middle;' src="${bandeira}" id="bandeira" width="60px" height="40px" class="rounded ms-3 mb-1 mt-1">
 	    				</div>
-	    				<div class="col">
+	    				<div class="col-12">
 	    				  <div class="row row-cols-1 row-cols-lg-2 g-0 mt-3 mt-sm-0 mb-2">	    					
 							  <div class="col-8">
 							    <div class="card bg-cinza border-0">
@@ -276,20 +292,28 @@
 							</div>
 	    				</div>
 	    			</div>
-	    			<div class="col-5" id="divPesquisa">		   	
-					  	<div class="input-group input-group-sm mt-2 ms-3">
-						  <span class="input-group-text">Gráfico últimos </span>
-						  <input type="number" class="form-control" placeholder="30" min=0 id="pesquisaGrafico">
-						  <select class="input-group-text" id="selectPesquisa">
-							<option value="dia">dias</option>
-							<option value="mes">mes</option>
-						  </select>
+	    			<div class="row mb-4 mb-md-0">
+		    			<div class="col-5" id="divPesquisa">		   	
+						  	<div class="input-group input-group-sm ms-3">
+							  <span class="input-group-text">Gráfico últimos </span>
+							  <input type="number" class="form-control" placeholder="30" min=0 id="pesquisaGrafico">
+							  <select class="input-group-text" id="selectPesquisa">
+								<option value="dia">dias</option>
+								<option value="mes">mes</option>
+							  </select>
+							</div>
+						 </div>
+						 <div class="col-6" id="divGraficoVacina">		   	
+						  	<div class="input-group input-group-sm ms-3">
+							  <button class="btn btn-outline-info ms-4" data-bs-toggle="modal" data-bs-target="#modalGrafico">Gráfico de Vacinação</button>
+							</div>
+						 </div>
+					 
+						<div class="col-12 mt-2">
+							<figure class="highcharts-figure" >
+						  		<div id="container" style="height: 370px;"></div>
+							</figure>
 						</div>
-					 </div>
-					<div class="col-12">
-						<figure class="highcharts-figure">
-					  		<div id="container"></div>
-						</figure>
 					</div>
 	    		</div>
 	    	</div>

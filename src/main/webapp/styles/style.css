@@ -126,8 +126,16 @@ body{
   background: #f1f7ff;
 }
 
+#graficoVacinacao .highcharts-background{
+	fill: #ffffff;
+}
+
 .highcharts-background{
 	fill: #191A1A;
+}
+
+#graficoVacinacao .highcharts-title, .highcharts-subtitle, .highcharts-axis-title{
+	fill:  #191A1A !important;
 }
 
 .highcharts-title, .highcharts-subtitle, .highcharts-axis-title{

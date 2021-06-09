@@ -10,6 +10,7 @@ $(document).ready(function(){
 	$("#bandeira-sm").hide();
 	$("#bandeira-md").hide();
 	$(".naoMostrar").css("display","none");
+	$("#divGraficoVacina").hide()
 	$(".footer").hide();
 	
 	$("#dataHoje").html(new Date(new Date().setDate(new Date().getDate()-1)).toLocaleDateString());
@@ -94,104 +95,6 @@ $(document).ready(function(){
 		}
 	});
 	
-	function procurarDados(array){
-	
-		let tamanho = array.length
-		let continua = true
-		let i = tamanho-1
-		
-		while(continua){
-			
-			 if(array[i].new_cases != "0" && array[i].new_cases != 0 && array[i].total_vaccinations != "null"){
-			 	$("#hojeCasos").html(Number(array[i].new_cases).toLocaleString());
-			 	continua = false;
-			 }
-			 
-			 i--;
-		}
-		
-		let continua_obitos = true
-		let j = tamanho-1
-					
-		while(continua_obitos){
-			
-			 if(array[j].new_deaths != "0" && array[j].new_deaths != 0 && array[j].total_vaccinations != "null"){
-			 	$("#hojeObitos").html(Number(array[j].new_deaths).toLocaleString());
-			 	continua_obitos = false;
-			 }
-			 
-			 j--;
-		}
-					
-					
-		let continua_vacinas = true
-		let k = tamanho-1
-		
-		try{
-			while(continua_vacinas){
-				
-				 if(array[k].new_vaccinations != "0" && array[k].new_vaccinations != 0 && array[k].new_vaccinations != "null" ){
-				 	$("#hojeVacinas").html(Number(array[k].new_vaccinations).toLocaleString());
-				 	continua_vacinas = false;
-				 } 
-				 k--;
-			}
-		} catch(e){
-			k = tamanho-1
-			
-			while(continua_vacinas){
-				
-				 if(array[k].new_vaccinations_smoothed != "0" && array[k].new_vaccinations_smoothed != 0 && array[k].new_vaccinations_smoothed != "null" ){
-				 	$("#hojeVacinas").html(Number(array[k].new_vaccinations_smoothed).toLocaleString());
-				 	continua_vacinas = false;
-				 } 
-				 k--;
-			}
-		}
-		
-		let continua_doses = true
-		let m = tamanho-1
-		
-		while(continua_doses){
-			
-			 if(array[m].people_vaccinated != "0" && array[m].people_vaccinated != 0 && array[m].people_vaccinated != "null" ){
-			 	$("#totalDoses").html(Number(array[m].total_vaccinations).toLocaleString());
-			 	continua_doses = false;
-			 } 
-			 m--;
-		}
-		
-		
-		let continua_total = true
-		let n = tamanho-1
-		
-		while(continua_total){
-			
-			 if(array[n].total_vaccinations != "0" && array[n].total_vaccinations != 0 && array[n].total_vaccinations != "null" ){
-			 	$("#totalVacinados").html(Number(array[n].people_vaccinated).toLocaleString());
-			 	continua_total = false;
-			 } 
-			 n--;
-		}
-		
-		let continua_imunizados = true
-		let o = tamanho-1
-		
-		while(continua_imunizados){
-			
-			 if(array[o].people_fully_vaccinated != "0" && array[o].people_fully_vaccinated != 0 && array[o].people_fully_vaccinated != "null" ){
-			 	$("#totalImunizados").html(Number(array[o].people_fully_vaccinated).toLocaleString());
-			 	continua_imunizados = false;
-			 } 
-			 o--;
-			  
-			if(o == 0){
-				$("#totalImunizados").html("Não informado");
-				 continua_imunizados = false;
-			}
-		}
-		
-	}
 	
 	function ajaxPost(event){
 	
@@ -251,10 +154,12 @@ $(document).ready(function(){
 					$("#totalCriticos").html(result.critical.toLocaleString());
 					$("#porcentagemCriticos").html(porcentagemCriticos + " %");
 
+					$("#divGraficoVacina").show()
 					$(".footer").show();
 					let array = result.covidData
 				
 					procurarDados(array)
+					montarGrafico()
 					
 					$(".naoMostrar").css("display","block");
 					$(".naoMostrar").css("height","87px");
@@ -402,7 +307,80 @@ $(document).ready(function(){
 		    }]
 		}
 	};
+	
+	
+	var options2 = {
+		chart: {
+	        plotBackgroundColor: null,
+	        plotBorderWidth: null,
+	        plotShadow: false,
+	        type: 'pie'
+	    },
+	    lang: {
+	      	contextButtonTitle: 'Exportar gráfico',
+	      	decimalPoint: ',',
+	        thousandsSep: '.',
+	      	downloadJPEG: 'Baixar imagem JPEG',
+			downloadPDF: 'Baixar arquivo PDF',
+			downloadPNG: 'Baixar imagem PNG',
+			downloadSVG: 'Baixar vetor SVG',
+			downloadCSV: 'Baixar arquivo CSV',
+			downloadXLS: 'Baixar arquivo XLS',
+			printChart: 'Imprimir gráfico',
+			viewFullscreen: 'Visualizar Tela Cheia',
+			viewData: 'Visualizar dados',
+			hideData: 'Esconder dados'
+       },
+      navigation: {
+        menuStyle: {
+            background: '#E0E0E0'
+        }
+      },
+      exporting: {
+        buttons: {
+            contextButton: {
+                symbolStroke: "white",
+                theme: {
+            		fill:"#191A1A"
+        		}
+            }
+        }
+      },
+	  title: {
+	     text: 'Gráfico de Vacinação'
+	  },
+	  tooltip: {
+	     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
+	     formatter: function () {
+                return  this.point.name+ ':'+ this.y.toFixed(1)+ '%, Total: ' + this.point.additionalData;
+          }
+	  },
+      accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+     },
+     plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            }
+        }
+     },
+	 series: [{
+        name: 'Total',
+        colorByPoint: true,
+        data: []
+       }]
+	}
+	
+	
 	var chart = Highcharts.chart('container', options)
+	var chart2 = Highcharts.chart('container-2', options2)
+	
 	
 	// Data
 	function getData(stringPais, lastDays) {
@@ -555,5 +533,128 @@ $(document).ready(function(){
 	   	  
 	    })
 	}
+	
+	function procurarDados(array){
+	
+		let tamanho = array.length
+		let continua = true
+		let i = tamanho-1
+		
+		while(continua){
+			
+			 if(array[i].new_cases != "0" && array[i].new_cases != 0 && array[i].total_vaccinations != "null"){
+			 	$("#hojeCasos").html(Number(array[i].new_cases).toLocaleString());
+			 	continua = false;
+			 }
+			 
+			 i--;
+		}
+		
+		let continua_obitos = true
+		let j = tamanho-1
+					
+		while(continua_obitos){
+			
+			 if(array[j].new_deaths != "0" && array[j].new_deaths != 0 && array[j].total_vaccinations != "null"){
+			 	$("#hojeObitos").html(Number(array[j].new_deaths).toLocaleString());
+			 	continua_obitos = false;
+			 }
+			 
+			 j--;
+		}
+					
+					
+		let continua_vacinas = true
+		let k = tamanho-1
+		
+		try{
+			while(continua_vacinas){
+				
+				 if(array[k].new_vaccinations != "0" && array[k].new_vaccinations != 0 && array[k].new_vaccinations != "null" ){
+				 	$("#hojeVacinas").html(Number(array[k].new_vaccinations).toLocaleString());
+				 	continua_vacinas = false;
+				 } 
+				 k--;
+			}
+		} catch(e){
+			k = tamanho-1
+			
+			while(continua_vacinas){
+				
+				 if(array[k].new_vaccinations_smoothed != "0" && array[k].new_vaccinations_smoothed != 0 && array[k].new_vaccinations_smoothed != "null" ){
+				 	$("#hojeVacinas").html(Number(array[k].new_vaccinations_smoothed).toLocaleString());
+				 	continua_vacinas = false;
+				 } 
+				 k--;
+			}
+		}
+		
+		let continua_doses = true
+		let m = tamanho-1
+		
+		while(continua_doses){
+			
+			 if(array[m].people_vaccinated != "0" && array[m].people_vaccinated != 0 && array[m].people_vaccinated != "null" ){
+			 	$("#totalDoses").html(Number(array[m].total_vaccinations).toLocaleString());
+			 	continua_doses = false;
+			 } 
+			 m--;
+		}
+		
+		
+		let continua_total = true
+		let n = tamanho-1
+		
+		while(continua_total){
+			
+			 if(array[n].total_vaccinations != "0" && array[n].total_vaccinations != 0 && array[n].total_vaccinations != "null" ){
+			 	$("#totalVacinados").html(Number(array[n].people_vaccinated).toLocaleString());
+			 	continua_total = false;
+			 } 
+			 n--;
+		}
+		
+		let continua_imunizados = true
+		let o = tamanho-1
+		
+		while(continua_imunizados){
+			
+			 if(array[o].people_fully_vaccinated != "0" && array[o].people_fully_vaccinated != 0 && array[o].people_fully_vaccinated != "null" ){
+			 	$("#totalImunizados").html(Number(array[o].people_fully_vaccinated).toLocaleString());
+			 	continua_imunizados = false;
+			 } 
+			 o--;
+			  
+			if(o == 0){
+				$("#totalImunizados").html("Não informado");
+				 continua_imunizados = false;
+			}
+		}
+		
+	}
+	
+	function montarGrafico(){
+		
+		let totalPopulacao = document.getElementById("populacao").innerText;
+		let totalVacinados =  document.getElementById("totalVacinados").innerText;
+		let totalImunizados =  document.getElementById("totalImunizados").innerText;
+		
+		let calcTotalVacinados = Number(totalVacinados.replaceAll(".", '')) * 100 / Number(totalPopulacao.replaceAll(".", ''))
+		let calcTotalImunizados = Number(totalImunizados.replaceAll(".", '')) * 100 / Number(totalPopulacao.replaceAll(".", ''))
+		let calcTotalPopulacao = 100 - (calcTotalVacinados + calcTotalImunizados)
+		
+ 		var series = chart2.series[0];
+        if (series.data.length) {
+            chart2.series[0].data[0].remove();
+            chart2.series[0].data[1].remove(); 
+            chart2.series[0].data[0].remove();  
+        }		
+		
+		chart2.series[0].addPoint({ name: 'População Não Vacinadas', y: calcTotalPopulacao, additionalData: totalPopulacao})
+		chart2.series[0].addPoint({ name: 'População Parcialmente Vacinada ', y: Number(calcTotalVacinados), additionalData: totalVacinados })
+		chart2.series[0].addPoint({ name: 'População Completamente Vacinada', y: Number(calcTotalImunizados), additionalData: totalImunizados})
+		
+	}
+	
 	
 })
