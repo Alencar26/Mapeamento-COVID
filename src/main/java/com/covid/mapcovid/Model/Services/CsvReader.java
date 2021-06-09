@@ -20,7 +20,7 @@ public class CsvReader {
 	
 	public List<CovidData> execute() throws IOException {
     	
-    	File excelFile = new File("D:\\owid-covid-data.xlsx");
+    	File excelFile = new File("src/main/webapp/excel/owid-covid-data.xlsx");
         FileInputStream fis = new FileInputStream(excelFile);
 
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
